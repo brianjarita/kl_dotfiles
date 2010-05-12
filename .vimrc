@@ -7,6 +7,8 @@ set backspace=indent,eol,start " allow backspacing over everything in insert mod
 set nowb
 set noswapfile
 set ttyfast
+let mapleader = ','
+let g:mapleader = ','
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " DISPLAY
@@ -98,6 +100,7 @@ set switchbuf=usetab
 set splitright
 set scrolloff=10
 set sidescrolloff=10
+set showtabline=1
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " COLORS
@@ -118,7 +121,16 @@ let python_highlight_all=1
 " STATUS LINE
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set laststatus=2
-set statusline=%t\ (%n)\ %m%r\ %y\ %=%{TagInStatusLine()}\ [%04l/%04L]\ %p%%
+" %t: current file
+" %n: buffer number
+" %m%r: modified and writable flags
+" %y: filetype
+" %=: align right
+" %{TagInStatusLine()}: show current class/function in Python
+" %041: current line number
+" %04L: total number of lines
+" %p%%: how far through the file the current line is, percentage
+set statusline=%t\ (%n)\ %m%r\ %y\ %r%{CurDir()}%h\ %=%{TagInStatusLine()}\ [%04l/%04L]\ %p%%
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " BACKUPS
@@ -131,6 +143,8 @@ if has("vms")
 else
     set backup
 endif
+set nowb
+set noswapfile
 set viminfo=%100,'100,/100,h,\"500,:100,n~/.viminfo
 set history=500
 set updatecount=100
@@ -142,6 +156,10 @@ if v:version >= 700
     setlocal spell spelllang=en_us
     nmap <LocalLeader>ss :set spell!<CR>
 endif
+try
+    lang en_US
+catch
+endtry
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " SEARCH
@@ -152,6 +170,11 @@ set infercase
 set hlsearch
 set showmatch
 set diffopt=filler,iwhite
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" COMMAND-LINE
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+cno $q <C-\>eDeleteTilSlash()<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " SETTINGS PER FILETYPE
@@ -171,7 +194,7 @@ if has("autocmd")
     autocmd FileType htmldjango setlocal ts=4 sts=4 sw=4 noexpandtab
     autocmd FileType css setlocal ts=2 sts=2 sw=2 expandtab
     autocmd FileType javascript setlocal ts=4 sts=4 sw=4 noexpandtab
-    autocmd FileType python setlocal ts=4 sts=4 sw=4 expandtab
+    autocmd FileType python setlocal ts=4 sts=4 sw=4 expandtab nocindent
 
     " Treat .rss files as XML
     autocmd BufNewFile,BufRead *.rss setfiletype xml
@@ -204,11 +227,12 @@ if has("autocmd")
     autocmd BufEnter * :syntax sync fromstart
 
     " mapping to make HTML files Django-highlighted
-    autocmd BufEnter *html nmap <F7> :setfiletype htmldjango<CR>
-    autocmd BufEnter *html nmap <S-F7> :setfiletype django<CR>
+    autocmd BufEnter *html nmap <F6> :setfiletype htmldjango<CR>
+    autocmd BufEnter *html nmap <S-F6> :setfiletype django<CR>
 
     if version >= 700
         autocmd FileType python set omnifunc=pythoncomplete#Complete
+        autocmd FileType css set omnifunc=csscomplete#CompleteCSS
     endif
 
     au BufNewFile,BufRead *xml,*htm* set foldmethod=indent
@@ -218,8 +242,11 @@ endif
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " KEY MAPPINGS
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" CD to directory of current file
+map <Leader>cd :cd %:p:h<CR>
+
 " Grep/QuickFix window bindings
-map <leader>c :botright cw 10<CR>
+map <Leader>c :botright cw 10<CR>
 
 " Don't move around in Insert mode
 inoremap <Left> <Esc><Right><Left>
@@ -292,8 +319,8 @@ nmap <D-[> <<
 vmap <D-]> >gv
 vmap <D-[> <gv
 
-" Hide search highlight
-nnoremap <silent> <leader>n :silent :set invhlsearch<CR>:set hlsearch?<CR>
+" Toggle search highlight
+nnoremap <silent> <Leader>ts :silent :set invhlsearch<CR>:set hlsearch?<CR>
 
 " Folds
 nnoremap <silent> <Space> @=(foldlevel('.')?'za':'l')<CR>
@@ -308,6 +335,27 @@ nmap * *zzzv
 nmap # #zzzv
 nmap g* g*zzzv
 nmap g# g#zzzv
+
+" Parenthesis/bracket expanding
+vnoremap $1 <esc>`>a)<esc>`<i(<esc>
+vnoremap $2 <esc>`>a]<esc>`<i[<esc>
+vnoremap $3 <esc>`>a}<esc>`<i{<esc>
+vnoremap $$ <esc>`>a"<esc>`<i"<esc>
+vnoremap $q <esc>`>a'<esc>`<i'<esc>
+vnoremap $e <esc>`>a"<esc>`<i"<esc>
+
+" Map auto complete of (, ", ', [
+inoremap $1 ()<esc>i
+inoremap $2 []<esc>i
+inoremap $3 {}<esc>i
+inoremap $4 {<esc>o}<esc>O
+inoremap $q ''<esc>i
+inoremap $e ""<esc>i
+
+" Mappings for cope
+map <leader>cc :botright cope<CR>
+map <leader>n :cn<CR>
+map <leader>p :cp<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " PLUGIN SETTINGS
@@ -377,12 +425,12 @@ imap <D-/> <C-O>,c<space>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:fuzzy_ignore = "*.log"
 let g:fuzzy_matching_limit = 70
-nmap <leader>t :FuzzyFinderTextMate<CR>
-nmap <leader>b :FuzzyFinderBuffer<CR>
+nmap <Leader>t :FuzzyFinderTextMate<CR>
+nmap <Leader>b :FuzzyFinderBuffer<CR>
 
 " NERD_TREE
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-nmap <leader>d :execute 'NERDTreeToggle ' . getcwd()<CR>
+nmap <Leader>d :execute 'NERDTreeToggle ' . getcwd()<CR>
 let g:NERDChristmasTree = 1
 let g:NERDTreeQuitOnOpen = 1
 let g:NERDTreeWinPos = 'right'
@@ -467,6 +515,8 @@ nmap <Leader>s :Sscratch<CR>
 let g:bufExplorerSortBy = 'mru'
 let g:bufExplorerSplitBelow = 1
 let g:bufExplorerSplitRight = 1
+let g:bufExplorerDefaultHelp = 0
+let g:bufExplorerShowRelativePath = 1
 
 " SENDMAIL
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -587,6 +637,28 @@ function! s:RunShellCommand(cmdline)
   1
 endfunction
 
+func! Cwd()
+    let cwd = getcwd()
+    return "e " . cwd
+endfunc
+
+func! DeleteTilSlash()
+    let g:cmd = getcmdline()
+    let g:cmd_edited = substitute(g:cmd, "\\(.*\[/\]\\).*", "\\1", "")
+    if g:cmd == g:cmd_edited
+        let g:cmd_edited = substitute(g:cmd, "\\(.*\[/\]\\).*/", "\\1", "")
+    endif
+    return g:cmd_edited
+endfunc
+
+func! CurrentFileDir(cmd)
+    return a:cmd . " " . expand("%:p:h") . "/"
+endfunc
+
+func! CurDir()
+    let curdir = substitute(getcwd(), '/Users/kennethlove', "~/", "g")
+    return curdir
+endfunc
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " MISCELLANEOUS
