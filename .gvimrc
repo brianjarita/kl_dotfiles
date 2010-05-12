@@ -37,7 +37,7 @@ set guioptions+=c
 hi Cursor guifg=gainsboro guibg=#ff00ff
 hi iCursor guifg=#000000 guibg=#00ffff
 set guicursor=n-v-c:block-Cursor
-set guicursor+=i:ver100-iCursor
+set guicursor+=i:ver50-iCursor
 set guicursor+=n-v-c:blinkon0-Cursor
 set guicursor+=i:blinkwait80-iCursor
 
