@@ -1,0 +1,50 @@
+set nocompatibleset cpoptions=aABceFsmqset autochdirset nostartofline " don't jump to the first character when pagingset titleset backspace=indent,eol,start " allow backspacing over everything in insert modeset nowbset noswapfileset ttyfast""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""" DISPLAY""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""set rulerset numberset showcmdset laststatus=2set complete=.,w,b,u,U,t,i,d,s,kfiletype plugin indent onset winminheight=0set winminwidth=0set winheight=10set display+=lastlineset textwidth=0set columns=90set wrapmargin=10set numberwidth=5""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""" BEHAVIOR""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""set autoreadset noautowriteset visualbellset t_vb= " visual bellset shellcmdflag=-cset shell=bash\ -lset modelineset modelines=5set tabpagemax=100set mousemodel=extendset noeaset shortmess=aOstT " shortens messages to avoid 'press a key' promptset magicset viminfo='10,\"100,:20,%,n~/.viminfoset confirmset report=0set smartcase" Saving sessionsset sessionoptions=blank,buffers,curdir,folds,globals,help,localoptions,options,resize,tabpages,winsize,winpos""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""" TEXT EDITING""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""set imdset wildmenuset wildmode=list:longest,fullset wildignore+=*.o,*~,.loset iskeyword+=$,@,%,# " none of these are word dividersset whichwrap=b,s,h,l,<,>,~,[,] "everything wrapsset undolevels=1000set autoindentset preserveindentset nosmartindentset smarttabset expandtabset tabstop=4set softtabstop=4set shiftwidth=4set wrapset formatoptions=lcroqwan2vb1set showmatchset matchtime=5set list" Use the same symbols as TextMate for tabstops and EOLsset listchars=tab:▸\ ,eol:¬,trail:-set showbreak=…set encoding=utf-8 fileencodings=.set showfulltag""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""" FOLDS"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""set foldmethod=indentset foldenableset foldopen=block,hor,mark,percent,quickfix,tagset foldminlines=2set fillchars+=fold:\ """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""" BUFFERS""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endifset bufhidden=hideset hidden " you can change buffers without savingset switchbuf=usetabset splitrightset scrolloff=10set sidescrolloff=10""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""" COLORS""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""syntax oncolorscheme wombat256set background=darkhi NonText ctermfg=7 guifg=grayhi SpecialKey ctermfg=8" Use the below highlight group when displaying bad whitespace is desired.highlight BadWhitespace ctermbg=red guibg=red" full Python syntax highlightinglet python_highlight_all=1""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""" STATUS LINE""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""set laststatus=2,V
+map <leader>n :cn<CR>,V
+                if len(menu) > 1:                    return menu,V
+                menu = Navigation.objects.get_active().filter(slug=self.nav.parent.slug),V
+                    menu = menu[0],V
+menu = Navigation.objects.get_active().filter(slug=n.parent.slug),v
+                        parent__parent__slug=self.nav.root.slug,V
+Navigation.objects.get_active().filter(                        parent__slug=self.nav.root.slug,                    ),v
+parent,v
+parent.parent,v
+                    menu = Navigation.objects.get_active().filter(,V
+Navigation.objects.get_active().filter(slug=n.parent.slug, parent__slug=n.parent.parent.slug),v
+                            parent__slug = self.nav.slug,,V
+                            slug = self.nav.slug,,V
+                    return 'boobs',V
+http://25.media.tumblr.com/tumblr_l29sjdSEXf1qziyd9o1_500.png,v
+                return 'boobs',V
+                            break,V
+                        if not len(menu):                            menu = Navigation.objects.get_active().filter(                                parent__slug = self.nav.root.slug                            ),V
+                        break,V
+                        return 'boobs',V
+                if not len(menu):                    menu = Navigation.objects.get_active().filter(                        parent__slug = self.nav.root.slug                    )                    if 'earthrise' in paths:                        menu = Navigation.objects.get_active().filter(                            parent__slug = self.nav.parent.slug                        ),V
+                    if not len(menu):,V
+                    except:                        menu = Navigation.objects.get_active().filter(                            parent__slug = self.nav.root.slug                        )                    """,V
+                    """                    try:,V
+http://www.youtube.com/user/pomplamoosemusic,v
+http://www.youtube.com/user/greyson97#p/a/u/2/-AwoiGR6c8M,v
+http://tumblrisforlulz.tumblr.com/post/590737169,v
+                        menu = Navigation.objects.get_active().filter(                            parent__slug = self.nav.parent.slug                        ),V
+                menu = Navigation.objects.get_active().filter(                    slug = self.nav.parent.slug                ),V
+                return self.nav.parent,V
+.slug,v
+fuck charles. he makes shitty sites,v
+                """ Found more than one Navigations with the same slug so filter further with the grandparent. """,V
+                """ Found more than one Navigations with the same slug so filter further with the parent. """,V
+                        menu = Navigation.objects.get_active().filter(                            slug = self.nav.parent.slug                        ),V
+                    menu = Navigation.objects.get_active().filter(                        slug = self.nav.parent.slug                    ),V
+                menu = Navigation.objects.get_active().filter(                    parent__slug = self.nav.parent.slug                ),V
+root,v
+parent__,v
+http://bitbucket.org/offline/django-simplepagination/wiki/Home,v
+                            menu = Navigation.objects.get_active().filter(                                parent__slug = self.nav.root.slug                            ),V
+                                parent__slug = self.nav.root.slug,V
+                        menu = Navigation.objects.get_active().filter(                            parent__slug = self.nav.root.slug                        )                        menu = self.nav.children.all(),V
+                menu = self.nav.children.all()                if not len(menu):                    menu = Navigation.objects.get_active().filter(                        parent__slug = self.nav.root.slug                    ),V
+                    menu = Navigation.objects.get_active().filter(                        parent__slug = self.nav.root.slug                    )                    menu = self.nav.children.all(),V
+                menu = Navigation.objects.get_active().filter(                    parent__slug = self.nav.root.slug                ),V
+She claims to have scientific evidence that it works.,v
+                    menu = self.nav.children.all(),V
+                        slug = self.nav.parent.slug,,V
