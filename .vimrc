@@ -1,4 +1,123 @@
+set nocompatible
+set cpoptions=aABceFsmq
+set autochdir
+set nostartofline " don't jump to the first character when paging
+set title
+set backspace=indent,eol,start " allow backspacing over everything in insert mode
+set nowb
+set noswapfile
+set ttyfast
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" DISPLAY
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set ruler
+set number
+set showcmd
+set laststatus=2
+set complete=.,w,b,u,U,t,i,d,s,k
+filetype plugin indent on
+set winminheight=0
+set winminwidth=0
+set winheight=10
+set display+=lastline
+set textwidth=0
+set columns=90
+set wrapmargin=10
+set numberwidth=5
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" BEHAVIOR
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set autoread
+set noautowrite
+set visualbell
+set t_vb= " visual bell
+set shellcmdflag=-c
+set shell=bash\ -l
+set modeline
+set modelines=5
+set tabpagemax=100
+set mousemodel=extend
+set noea
+set shortmess=aOstT " shortens messages to avoid 'press a key' prompt
+set magic
+set viminfo='10,\"100,:20,%,n~/.viminfo
+set confirm
+set report=0
+set smartcase
+
+" Saving sessions
+set sessionoptions=blank,buffers,curdir,folds,globals,help,localoptions,options,resize,tabpages,winsize,winpos
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" TEXT EDITING
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set imd
+set wildmenu
+set wildmode=list:longest,full
+set wildignore+=*.o,*~,.lo
+set iskeyword+=$,@,%,# " none of these are word dividers
+set whichwrap=b,s,h,l,<,>,~,[,] "everything wraps
+set undolevels=1000
+set autoindent
+set preserveindent
+set nosmartindent
+set smarttab
+set expandtab
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
+set wrap
+set formatoptions=lcroqwan2vb1
+set showmatch
+set matchtime=5
+set list
+" Use the same symbols as TextMate for tabstops and EOLs
+set listchars=tab:▸\ ,eol:¬,trail:-
+set showbreak=…
+set encoding=utf-8 fileencodings=.
+set showfulltag
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" FOLDS
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"set foldmethod=indent
+set foldenable
+set foldopen=block,hor,mark,percent,quickfix,tag
+set foldminlines=2
+set fillchars+=fold:\ 
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" BUFFERS
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif
+set bufhidden=hide
+set hidden " you can change buffers without saving
+set switchbuf=usetab
+set splitright
+set scrolloff=10
+set sidescrolloff=10
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" COLORS
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+syntax on
+colorscheme wombat256
+set background=dark
+hi NonText ctermfg=7 guifg=gray
+hi SpecialKey ctermfg=8
+
+" Use the below highlight group when displaying bad whitespace is desired.
+highlight BadWhitespace ctermbg=red guibg=red
+
+" full Python syntax highlighting
+let python_highlight_all=1
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" STATUS LINE
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set laststatus=2
 set statusline=%t\ (%n)\ %m%r\ %y\ %=%{TagInStatusLine()}\ [%04l/%04L]\ %p%%
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
