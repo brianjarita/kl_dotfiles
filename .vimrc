@@ -9,6 +9,10 @@ set noswapfile
 set ttyfast
 let mapleader = ','
 let g:mapleader = ','
+let localleader = ','
+let g:localleader = ','
+let leader = ','
+let g:leader = ','
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " DISPLAY
@@ -98,8 +102,8 @@ set bufhidden=hide
 set hidden " you can change buffers without saving
 set switchbuf=usetab
 set splitright
-set scrolloff=10
-set sidescrolloff=10
+set scrolloff=5
+set sidescrolloff=5
 set showtabline=1
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -296,9 +300,9 @@ nmap <silent> <LocalLeader>s :set nolist!<CR>
 " Up/down go visually instead of by physical lines
 " Interactive ones need to check whether we're in the autocomplete popup
 map <up> gk
-"inoremap <up> <C-R>=pumvisible() ? "\<lt>up>" : "\<lt>C-o>gk"<Enter>
+inoremap <up> <C-R>=pumvisible() ? "\<lt>up>" : "\<lt>C-o>gk"<Enter>
 map <down> gj
-"inoremap <down> <C-R>=pumvisible() ? "\<lt>down>" : "\<lt>C-o>gj"<Enter>
+inoremap <down> <C-R>=pumvisible() ? "\<lt>down>" : "\<lt>C-o>gj"<Enter>
 
 " Map normal mode Enter to add a new line before the current one
 nmap <Enter> O<Esc>
@@ -361,10 +365,12 @@ map <leader>p :cp<CR>
 " PLUGIN SETTINGS
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" CHANGES
+" PyDiction
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:changes_autocmd = 1
-let g:changes_verbose = 0
+let g:pydiction_location="/Users/kennethlove/.vim/ftplugin/python/pydiction/complete-dict"
+if has("autocmd")
+    autocmd FileType python set complete+=k/Users/kennethlove/.vim/ftplugin/python/pydiction iskeyword+=.,(
+endif
 
 " MATCHIT
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -508,7 +514,7 @@ nmap <Leader>gc :Gcommit<CR>
 
 " SCRATCH BUFFER
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-nmap <Leader>s :Sscratch<CR>
+nmap <Leader>S :Sscratch<CR>
 
 " BUFEXPLORER
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
