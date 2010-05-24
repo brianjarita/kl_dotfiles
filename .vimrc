@@ -102,8 +102,8 @@ set bufhidden=hide
 set hidden " you can change buffers without saving
 set switchbuf=usetab
 set splitright
-set scrolloff=5
-set sidescrolloff=5
+set scrolloff=2
+set sidescrolloff=2
 set showtabline=1
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -134,7 +134,10 @@ set laststatus=2
 " %041: current line number
 " %04L: total number of lines
 " %p%%: how far through the file the current line is, percentage
-set statusline=%t\ (%n)\ %m%r\ %y\ %r%{CurDir()}%h\ %=%{TagInStatusLine()}\ [%04l/%04L]\ %p%%
+"set statusline+=%#warningmsg#
+"set statusline+=%{SyntasticStatuslineFlag()}
+"set statusline+=%*
+set statusline=%t\ (%n)\ %m%r\ %y\ %r%{CurDir()}%h\ %#warningmsg#%{SyntasticStatuslineFlag()}%*\ %=%{TagInStatusLine()}\ [%04l/%04L]\ %p%%
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " BACKUPS
@@ -446,6 +449,7 @@ let g:NERDTreeAutoCenter = 1
 let g:NERDTreeIgnore = ['\.git$', '\.svn$', '\.jpg$', '\.gif$', '\.png$', '\.pyc', '\.DS_Store']
 let g:NERDTreeShowBookmarks = 1
 let g:NERDTreeSortOrder = ['\/$', '*']
+let g:NERDTreeShowLineNumbers = 1
 
 " YANKRING
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
