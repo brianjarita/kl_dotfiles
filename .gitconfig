@@ -1,0 +1,45 @@
+[user]
+  name = Kenneth Love
+  email = kenneth@eyeheartzombies.com
+[color]
+  diff = auto
+  status = auto
+  branch = auto
+  ui = auto
+[color "branch"]
+  current = yellow reverse
+  local = yellow
+  remote = green
+[color "diff"]
+  meta = yellow bold
+  frag = magenta bold
+  old = red bold
+  new = green bold
+[color "status"]
+  added = yellow
+  changed = green
+  untracked = cyan
+[alias]
+  st = status
+  di = diff
+  co = checkout
+  ci = commit
+  br = branch
+  branches = branch
+  sta = stash
+  graph = log --pretty=oneline --graph --all
+  stage = add
+  unstage = reset HEAD
+  lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %f %Cgreen(%cr)%Creset' --abbrev-commit --date=relative
+[merge]
+  tool = opendiff
+[core]
+  excludesfiles = /Users/kennethlove/.gitignore
+  whitespace = -trailing-space
+[apply]
+  whitespace = nowarn
+[github]
+	user = kennethlove
+	token = 0a803bdfaf1ba363487fbd1437f53ee5
+[difftool "Kaleidoscope"]
+	cmd = ksdiff-wrapper git \"$LOCAL\" \"$REMOTE\"
