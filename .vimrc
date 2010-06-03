@@ -242,7 +242,11 @@ if has("autocmd")
         autocmd FileType css set omnifunc=csscomplete#CompleteCSS
     endif
 
-    au BufNewFile,BufRead *xml,*htm* set foldmethod=indent
+    " CSS, XML, and HTML file shoulds be folded based on indent
+    au BufNewFile,BufRead *css,*xml,*htm* set foldmethod=indent
+
+    " CSS and Sass files should see - as part of a keyword
+    autocmd FileType css,sass set iskeyword +=-
 endif
 
 
