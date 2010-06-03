@@ -35,7 +35,7 @@ export FIGNORE="DS_Store"
 export LANG="en_US.UTF-8"
 
 export PATH="/Library/Frameworks/Python.framework/Versions/2.6/bin:/usr/texbin:/usr/local/bin:/usr/local/sbin:/usr/local/mysql/bin:/usr/local/pgsql/bin:/Users/kennethlove/.gem/ruby/1.8/bin:$PATH"
-export PYTHONPATH="/Sites:/usr/local/bin:/usr/local/lib:$PYTHONPATH"
+export PYTHONPATH="/Library/Python/2.6:/Sites:/usr/local/bin:/usr/local/lib:$PYTHONPATH"
 export GDFONTPATH="/Users/kennethlove/Library/Fonts:/Library/Fonts:/System/Library/Fonts"
 export WORKON_HOME=$HOME/.virtualenvs
 export PIP_VIRTUALENV_BASE=$WORKON_HOME
@@ -77,11 +77,12 @@ fi
 if [ -f /etc/git-completion.bash ]; then
 	. /etc/git-completion.bash
 fi
-source /usr/local/bin/virtualenvwrapper_bashrc
+#source /usr/local/bin/virtualenvwrapper_bashrc
+source /usr/local/bin/virtualenvwrapper.sh
 if [ -f /usr/local/share/doc/task/scripts/bash/task_completion.sh ]; then
     . /usr/local/share/doc/task/scripts/bash/task_completion.sh
 fi
-source ~/src/django-trunk/extras/django_bash_completion
+#source ~/src/django-trunk/extras/django_bash_completion
 
 complete -cf sudo
 
