@@ -19,6 +19,7 @@ alias l="ls"
 alias lg="ls -R | grep ":$" | sed -e 's/:$//' -e 's/[^-][^\/]*\//-/g' -e 's/^/ /' -e 's/-/|/'"
 alias sites="cd /Sites"
 alias top='top -ocpu'
+alias todo='/Users/kennethlove/src/pyThings/pyThings'
 
 # Start and Stop Servers
 alias start_mysql="sudo launchctl load -w /Library/LaunchDaemons/com.mysql.mysqld.plist"
@@ -83,6 +84,52 @@ if [ -f /usr/local/share/doc/task/scripts/bash/task_completion.sh ]; then
     . /usr/local/share/doc/task/scripts/bash/task_completion.sh
 fi
 #source ~/src/django-trunk/extras/django_bash_completion
+
+# Use MacVim's VIM instead of system VIM.
+# Start gVIM
+v() {
+if [ $# == 0 ]
+then
+    /Applications/MacVim.app/Contents/MacOS/Vim -g &
+else 
+    if [ "$1" == "-" ]
+    then
+    /Applications/MacVim.app/Contents/MacOS/Vim -g -
+    else
+    /Applications/MacVim.app/Contents/MacOS/Vim -g "$@" &
+    fi
+fi
+}
+
+# Start terminal version of VIM with clipboard support
+vi() {
+if [ $# == 0 ]
+then
+    /Applications/MacVim.app/Contents/MacOS/Vim 
+else 
+    if [ "$1" == "-" ]
+    then 
+    /Applications/MacVim.app/Contents/MacOS/Vim -
+    else 
+    /Applications/MacVim.app/Contents/MacOS/Vim "$@" 
+    fi
+fi
+}
+
+# Start terminal version of VIM with clipboard support
+vim() {
+if [ $# == 0 ]
+then
+    /Applications/MacVim.app/Contents/MacOS/Vim 
+else 
+    if [ "$1" == "-" ]
+    then 
+    /Applications/MacVim.app/Contents/MacOS/Vim -
+    else 
+    /Applications/MacVim.app/Contents/MacOS/Vim "$@" 
+    fi
+fi
+}
 
 complete -cf sudo
 

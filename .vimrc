@@ -92,7 +92,7 @@ set showfulltag
 set foldenable
 set foldopen=block,hor,mark,percent,quickfix,tag
 set foldminlines=2
-set fillchars+=fold:\ 
+set fillchars+=fold:\
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " BUFFERS
@@ -215,8 +215,6 @@ if has("autocmd")
         autocmd BufRead *.mkd  set ai formatoptions=tcroqn2 comments=n:>
     augroup END
 
-    "autocmd BufRead,BufNewFile,FileReadPost *.py source ~/.vim/plugin/python.vim
-
     " JSON syntax
     au! BufRead,BufNewFile *.json setfiletype json
 
@@ -247,6 +245,7 @@ if has("autocmd")
 
     " CSS and Sass files should see - as part of a keyword
     autocmd FileType css,sass set iskeyword +=-
+
 endif
 
 
@@ -307,9 +306,9 @@ nmap <silent> <LocalLeader>s :set nolist!<CR>
 " Up/down go visually instead of by physical lines
 " Interactive ones need to check whether we're in the autocomplete popup
 map <up> gk
-inoremap <up> <C-R>=pumvisible() ? "\<lt>up>" : "\<lt>C-o>gk"<Enter>
+"inoremap <up> <C-R>=pumvisible() ? "\<lt>up>" : "\<lt>C-o>gk"<Enter>
 map <down> gj
-inoremap <down> <C-R>=pumvisible() ? "\<lt>down>" : "\<lt>C-o>gj"<Enter>
+"inoremap <down> <C-R>=pumvisible() ? "\<lt>down>" : "\<lt>C-o>gj"<Enter>
 
 " Map normal mode Enter to add a new line before the current one
 nmap <Enter> O<Esc>
@@ -368,6 +367,11 @@ map <leader>cc :botright cope<CR>
 map <leader>n :cn<CR>
 map <leader>p :cp<CR>
 
+" Mapping for tabs/buffers
+map gz :bdelete<CR>
+map gb :bnext<CR>
+map gB :bprev<CR>
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " PLUGIN SETTINGS
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -420,7 +424,7 @@ let Tlist_Ctags_Cmd='/usr/local/bin/ctags'
 let Tlist_Show_Menu=1
 let Tlist_GainFocus_On_ToggleOpen=1
 let Tlist_Close_On_Select=1
-nnoremap <silent> <Leader>T :TlistToggle<CR>
+nnoremap <silent> <Leader>l :TlistToggle<CR>
 
 " RAGTAG
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -438,7 +442,7 @@ imap <D-/> <C-O>,c<space>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:fuzzy_ignore = "*.log"
 let g:fuzzy_matching_limit = 70
-nmap <Leader>t :FuzzyFinderTextMate<CR>
+nmap <Leader>f :FuzzyFinderTextMate<CR>
 nmap <Leader>b :FuzzyFinderBuffer<CR>
 
 " NERD_TREE
@@ -547,6 +551,31 @@ let tumblr_password = "zombot76"
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " FUNCTIONS
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" REMAP TAB KEY
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+function! InsertTabWrapper()
+    let col = col('.') - 1
+    if !col || getline('.')[col - 1] !~ '\k'
+        return "\<tab>"
+    else
+        return "\<c-p>"
+    endif
+endfunction
+inoremap <tab> <c-r>=InsertTabWrapper()<cr>
+inoremap <s-tab> <c-n>
+
+" INSERT SNIPPET
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+function! InsertSnippetWrapper()
+    let inserted = TriggerSnippet()
+    if inserted == "\<tab>"
+        return ";"
+    else
+        return inserted
+    endif
+endfunction
+"inoremap ; <c-r>=InsertSnippetWrapper()<cr>
 
 " CREATE WORDPROCESSING MODE
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -683,3 +712,102 @@ au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|
 " Show tasks from TaskWarrior
 command! -complete=file -nargs=* Tasks call s:RunShellCommand('task '.<q-args>)
 
+function! RunTests(target, args)
+    silent ! echo
+    exec 'silent ! echo -e "\033[1;36mRunning tests in ' . a:target . '\033[0m"'
+    silent w
+    exec "make " . a:target . " " . a:args
+endfunction
+
+function! ClassToFilename(class_name)
+    let understored_class_name = substitute(a:class_name, '\(.\)\(\u\)', '\1_\U\2', 'g')
+    let file_name = substitute(understored_class_name, '\(\u\)', '\L\1', 'g')
+    return file_name
+endfunction
+
+function! ModuleTestPath()
+    let file_path = @%
+    let components = split(file_path, '/')
+    let path_without_extension = substitute(file_path, '\.py$', '', '')
+    let test_path = 'tests/unit/' . path_without_extension
+    return test_path
+endfunction
+
+function! NameOfCurrentClass()
+    let save_cursor = getpos(".")
+    normal $<cr>
+    call PythonDec('class', -1)
+    let line = getline('.')
+    call setpos('.', save_cursor)
+    let match_result = matchlist(line, ' *class \+\(\w\+\)')
+    let class_name = ClassToFilename(match_result[1])
+    return class_name
+endfunction
+
+function! TestFileForCurrentClass()
+    let class_name = NameOfCurrentClass()
+    let test_file_name = ModuleTestPath() . '/test_' . class_name . '.py'
+    return test_file_name
+endfunction
+
+function! TestModuleForCurrentFile()
+    let test_path = ModuleTestPath()
+    let test_module = substitute(test_path, '/', '.', 'g')
+    return test_module
+endfunction
+
+function! RunTestsForFile(args)
+    if @% =~ 'test_'
+        call RunTests('%', a:args)
+    else
+        let test_file_name = TestModuleForCurrentFile()
+        call RunTests(test_file_name, a:args)
+    endif
+endfunction
+
+function! RunAllTests(args)
+    silent ! echo
+    silent ! echo -e "\033[1;36mRunning all unit tests\033[0m"
+    silent w
+    exec "make!" . a:args
+endfunction
+
+function! JumpToError()
+    if getqflist() != []
+        for error in getqflist()
+            if error['valid']
+                break
+            endif
+        endfor
+        let error_message = substitute(error['text'], '^ *', '', 'g')
+        silent cc!
+        exec ":sbuffer " . error['bufnr']
+        call RedBar()
+        echo error_message
+    else
+        call GreenBar()
+        echo "All tests passed"
+    endif
+endfunction
+
+function! RedBar()
+    hi RedBar ctermfg=white ctermbg=red guibg=red
+    echohl RedBar
+    echon repeat(" ",&columns - 1)
+    echohl
+endfunction
+
+function! GreenBar()
+    hi GreenBar ctermfg=white ctermbg=green guibg=green
+    echohl GreenBar
+    echon repeat(" ",&columns - 1)
+    echohl
+endfunction
+
+function! JumpToTestsForClass()
+    exec 'e ' . TestFileForCurrentClass()
+endfunction
+
+nnoremap <leader>t :call RunAllTests('')<cr>:redraw<cr>:call JumpToError()<cr>
+nnoremap <leader>T :call RunAllTests('')<cr>
+nnoremap <leader><leader> <c-^>
