@@ -64,6 +64,7 @@ set wildmenu
 set wildmode=list:longest,full
 set wildignore+=*.o,*~,.lo
 set iskeyword+=$,@,%,# " none of these are word dividers
+set iskeyword-=_,. " these are word dividers
 set whichwrap=b,s,h,l,<,>,~,[,] "everything wraps
 set undolevels=1000
 set autoindent
@@ -137,7 +138,7 @@ set laststatus=2
 "set statusline+=%#warningmsg#
 "set statusline+=%{SyntasticStatuslineFlag()}
 "set statusline+=%*
-set statusline=%t\ (%n)\ %m%r\ %y\ %r%{CurDir()}%h\ %#warningmsg#%{SyntasticStatuslineFlag()}%*\ %=%{TagInStatusLine()}\ [%04l/%04L]\ %p%%
+set statusline=%F\ (%n)\ %([%M%R%H%W]\ %)%y\ %=%<[%04l/%04L\ %03c]\ %p%%
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " BACKUPS
@@ -410,6 +411,10 @@ let g:proj_flags = "istbcLST"
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:LustyJugglerSuppressRubyWarning = 1
 
+" EASYTAGS
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:easytags_resolve_links = 1
+
 " TAGLIST
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let Tlist_Use_Right_Window=1
@@ -424,7 +429,7 @@ let Tlist_Ctags_Cmd='/usr/local/bin/ctags'
 let Tlist_Show_Menu=1
 let Tlist_GainFocus_On_ToggleOpen=1
 let Tlist_Close_On_Select=1
-nnoremap <silent> <Leader>l :TlistToggle<CR>
+nnoremap <silent> <Leader>t :TlistToggle<CR>
 
 " RAGTAG
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -437,13 +442,6 @@ let g:ragtag_global_maps = 1
 nmap <D-/> ,c<space>
 vmap <D-/> ,c<space>
 imap <D-/> <C-O>,c<space>
-
-" FUZZYFINDERTEXTMATE
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:fuzzy_ignore = "*.log"
-let g:fuzzy_matching_limit = 70
-nmap <Leader>f :FuzzyFinderTextMate<CR>
-nmap <Leader>b :FuzzyFinderBuffer<CR>
 
 " NERD_TREE
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -709,71 +707,49 @@ endfunc
 " This beauty remembers where you were the last time you edited the file, and returns to the same position.
 au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif
 
-" Show tasks from TaskWarrior
-command! -complete=file -nargs=* Tasks call s:RunShellCommand('task '.<q-args>)
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" TESTING
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:makeprg_django_app = 'python\ manage.py\ test'
+let g:makeprg_django_project = 'python\ manage.py\ test'
+set errorformat=%C\ %.%#,%A\ \ File\ \"%f\"\\,\ line\ %l%.%#,%Z%[%^\ ]%\\@=%m
+
+function! RunTestsForFile(args)
+    if @% =~ '\.py$'
+        let expandstr = '%:p:h' " dirname
+        while expand(expandstr) != '/'
+            let testpath = expand(expandstr)
+            if len(getfperm(testpath . '/tests')) > 0 || len(getfperm(testpath . '/tests.py')) > 0
+                call RunTests(expand(expandstr . ':t'), a:args)
+                return
+            endif
+            let expandstr .= ':h'
+        endwhile
+    endif
+    call RunTests('', a:args)
+endfunction
 
 function! RunTests(target, args)
     silent ! echo
-    exec 'silent ! echo -e "\033[1;36mRunning tests in ' . a:target . '\033[0m"'
-    silent w
-    exec "make " . a:target . " " . a:args
-endfunction
-
-function! ClassToFilename(class_name)
-    let understored_class_name = substitute(a:class_name, '\(.\)\(\u\)', '\1_\U\2', 'g')
-    let file_name = substitute(understored_class_name, '\(\u\)', '\L\1', 'g')
-    return file_name
-endfunction
-
-function! ModuleTestPath()
-    let file_path = @%
-    let components = split(file_path, '/')
-    let path_without_extension = substitute(file_path, '\.py$', '', '')
-    let test_path = 'tests/unit/' . path_without_extension
-    return test_path
-endfunction
-
-function! NameOfCurrentClass()
-    let save_cursor = getpos(".")
-    normal $<cr>
-    call PythonDec('class', -1)
-    let line = getline('.')
-    call setpos('.', save_cursor)
-    let match_result = matchlist(line, ' *class \+\(\w\+\)')
-    let class_name = ClassToFilename(match_result[1])
-    return class_name
-endfunction
-
-function! TestFileForCurrentClass()
-    let class_name = NameOfCurrentClass()
-    let test_file_name = ModuleTestPath() . '/test_' . class_name . '.py'
-    return test_file_name
-endfunction
-
-function! TestModuleForCurrentFile()
-    let test_path = ModuleTestPath()
-    let test_module = substitute(test_path, '/', '.', 'g')
-    return test_module
-endfunction
-
-function! RunTestsForFile(args)
-    if @% =~ 'test_'
-        call RunTests('%', a:args)
-    else
-        let test_file_name = TestModuleForCurrentFile()
-        call RunTests(test_file_name, a:args)
-    endif
-endfunction
-
-function! RunAllTests(args)
-    silent ! echo
     silent ! echo -e "\033[1;36mRunning all unit tests\033[0m"
     silent w
-    exec "make!" . a:args
+    if len(a:target)
+        execute 'set makeprg=' . g:makeprg_django_app
+    else
+        execute 'set makeprg=' . g:makeprg_django_project
+    endif
+    exec "make! " . a:target . " " . a:args
 endfunction
 
 function! JumpToError()
-    if getqflist() != []
+    let has_valid_error = 0
+    for error in getqflist()
+        if error['valid']
+            let has_valid_error = 1
+            break
+        endif
+    endfor
+    if has_valid_error
         for error in getqflist()
             if error['valid']
                 break
@@ -804,10 +780,5 @@ function! GreenBar()
     echohl
 endfunction
 
-function! JumpToTestsForClass()
-    exec 'e ' . TestFileForCurrentClass()
-endfunction
-
-nnoremap <leader>t :call RunAllTests('')<cr>:redraw<cr>:call JumpToError()<cr>
-nnoremap <leader>T :call RunAllTests('')<cr>
-nnoremap <leader><leader> <c-^>
+nnoremap <leader>a :call RunTests('', '')<cr>:redraw<cr>:call JumpToError()<cr>
+nnoremap <leader>y :call RunTestsForFile('--failfast')<cr>:redraw<cr>:call JumpToError()<cr>
