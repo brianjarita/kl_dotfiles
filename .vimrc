@@ -117,7 +117,12 @@ hi NonText ctermfg=7 guifg=gray
 hi SpecialKey ctermfg=8
 
 " Use the below highlight group when displaying bad whitespace is desired.
-highlight BadWhitespace ctermbg=red guibg=red
+highlight ExtraWhitespace ctermbg=red guibg=red
+match ExtraWhitespace /\s\+$/
+autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
+autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+autocmd InsertLeave * match ExtraWhitespace /\s\+$/
+autocmd BufWinLeave * call clearmatches()
 
 " full Python syntax highlighting
 let python_highlight_all=1
@@ -138,7 +143,7 @@ set laststatus=2
 "set statusline+=%#warningmsg#
 "set statusline+=%{SyntasticStatuslineFlag()}
 "set statusline+=%*
-set statusline=%F\ (%n)\ %([%M%R%H%W]\ %)%y\ %=%<[%04l/%04L\ %03c]\ %p%%
+set statusline=%F\ (%n)\ %([%M%R%H%W]\ %)%y\ %=%<%{TagInStatusLine()}\ [%04l/%04L\ %03c]\ %p%%
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " BACKUPS
@@ -223,9 +228,10 @@ if has("autocmd")
     au! BufRead,BufNewFile *.js set ft=javascript.jquery
 
     " Display tabs at the beginning of a line in Python mode as bad
-    au BufRead,BufNewFile *.py,*.pyw match BadWhitespace /^\t\+/
+    au BufRead,BufNewFile *.py,*.pyw match ExtraWhitespace /^\t\+/
     " Make trailing whitespace be flagged as bad
-    au BufRead,BufNewFile *.py,*.pyw match BadWhitespace /\s\+$/
+    au BufRead,BufNewFile *.py,*.pyw match ExtraWhitespace /\s\+$/
+    au BufRead,BufNewFile *.py,*.pyw let python_space_errors = 1
 
     " only UNIX line endings.
     au BufNewFile *.* set fileformat=unix
@@ -414,21 +420,23 @@ let g:LustyJugglerSuppressRubyWarning = 1
 " EASYTAGS
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:easytags_resolve_links = 1
+let g:easytags_cmd = '/usr/local/bin/ctags'
 
 " TAGLIST
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let Tlist_Use_Right_Window=1
-let Tlist_Auto_Open=0
-let Tlist_Enable_Fold_Column=0
-let Tlist_Compact_Format=1
-let Tlist_WinWidth=40
-let Tlist_Exit_OnlyWindow=1
-let Tlist_File_Fold_Auto_Close=1
-let Tlist_Sort_Type='name'
-let Tlist_Ctags_Cmd='/usr/local/bin/ctags'
-let Tlist_Show_Menu=1
-let Tlist_GainFocus_On_ToggleOpen=1
-let Tlist_Close_On_Select=1
+let Tlist_Use_Right_Window = 1
+let Tlist_Auto_Open = 0
+let Tlist_Enable_Fold_Column = 0
+let Tlist_Compact_Format = 1
+let Tlist_WinWidth = 40
+let Tlist_Exit_OnlyWindow = 1
+let Tlist_File_Fold_Auto_Close = 1
+let Tlist_Sort_Type = 'name'
+let Tlist_Ctags_Cmd = '/usr/local/bin/ctags'
+let Tlist_Show_Menu = 1
+let Tlist_GainFocus_On_ToggleOpen = 1
+let Tlist_Close_On_Select = 1
+let Tlist_Auto_Update = 1
 nnoremap <silent> <Leader>t :TlistToggle<CR>
 
 " RAGTAG
