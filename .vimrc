@@ -453,7 +453,7 @@ imap <D-/> <C-O>,c<space>
 
 " NERD_TREE
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-nmap <Leader>d :execute 'NERDTreeToggle ' . getcwd()<CR>
+nmap <Leader>d :NERDTreeToggle<CR>
 let g:NERDChristmasTree = 1
 let g:NERDTreeQuitOnOpen = 1
 let g:NERDTreeWinPos = 'right'
@@ -512,9 +512,10 @@ let g:yankring_paste_check_default_buffer = 1
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " use signs to indicate lines with errors
 " only if signs are available
-if has('signs')
-    let g:syntastic_enable_signs = 1
-endif
+"if has('signs')
+    "let g:syntastic_enable_signs = 1
+"endif
+let g:syntastic_enable_signs = 1
 
 " automatically open the location list when a buffer has errors
 let g:syntastic_auto_loc_list = 1
@@ -523,7 +524,7 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_quiet_warnings = 0
 
 " ignore djangohtml
-let g:syntastic_disabled_filetypes = ['html', 'txt', 'text', 'tumblr', 'css']
+"let g:syntastic_disabled_filetypes = ['html', 'txt', 'text', 'tumblr', 'css']
 
 " FUGITIVE
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -557,31 +558,6 @@ let tumblr_password = "zombot76"
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " FUNCTIONS
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-" REMAP TAB KEY
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-function! InsertTabWrapper()
-    let col = col('.') - 1
-    if !col || getline('.')[col - 1] !~ '\k'
-        return "\<tab>"
-    else
-        return "\<c-p>"
-    endif
-endfunction
-"inoremap <tab> <c-r>=InsertTabWrapper()<cr>
-"inoremap <s-tab> <c-n>
-
-" INSERT SNIPPET
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-function! InsertSnippetWrapper()
-    let inserted = TriggerSnippet()
-    if inserted == "\<tab>"
-        return ";"
-    else
-        return inserted
-    endif
-endfunction
-"inoremap ; <c-r>=InsertSnippetWrapper()<cr>
 
 " CREATE WORDPROCESSING MODE
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
