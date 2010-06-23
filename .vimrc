@@ -472,6 +472,7 @@ inoremap $e ""<esc>i
 map <leader>cc :botright cope<CR>
 map <leader>n :cn<CR>
 map <leader>p :cp<CR>
+map <leader>ll :ll<CR>
 
 " Mapping for tabs/buffers
 map gz :bdelete<CR>
@@ -611,10 +612,10 @@ let g:yankring_paste_check_default_buffer = 1
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " use signs to indicate lines with errors
 " only if signs are available
-"if has('signs')
-    "let g:syntastic_enable_signs = 1
-"endif
-let g:syntastic_enable_signs = 1
+if has('signs')
+    let g:syntastic_enable_signs = 1
+endif
+"let g:syntastic_enable_signs = 1
 
 " automatically open the location list when a buffer has errors
 let g:syntastic_auto_loc_list = 1
