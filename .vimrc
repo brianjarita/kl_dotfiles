@@ -657,6 +657,7 @@ function! s:HighlightLongLines(width)
         echomsg "Usage: HighlightLongLines [natural number]"
     endif
 endfunction
+nmap <leader>h :HighlightLongLines<CR>
 
 " CREATE WORDPROCESSING MODE
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
