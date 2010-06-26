@@ -76,7 +76,7 @@ if [ -f /etc/bash_completion ]; then
     . /etc/bash_completion
 fi
 if [ -f /etc/git-completion.bash ]; then
-	. /etc/git-completion.bash
+    . /etc/git-completion.bash
 fi
 #source /usr/local/bin/virtualenvwrapper_bashrc
 source /usr/local/bin/virtualenvwrapper.sh
@@ -91,7 +91,7 @@ v() {
 if [ $# == 0 ]
 then
     /Applications/MacVim.app/Contents/MacOS/Vim -g &
-else 
+else
     if [ "$1" == "-" ]
     then
     /Applications/MacVim.app/Contents/MacOS/Vim -g -
@@ -105,13 +105,13 @@ fi
 vi() {
 if [ $# == 0 ]
 then
-    /Applications/MacVim.app/Contents/MacOS/Vim 
-else 
+    /Applications/MacVim.app/Contents/MacOS/Vim
+else
     if [ "$1" == "-" ]
-    then 
+    then
     /Applications/MacVim.app/Contents/MacOS/Vim -
-    else 
-    /Applications/MacVim.app/Contents/MacOS/Vim "$@" 
+    else
+    /Applications/MacVim.app/Contents/MacOS/Vim "$@"
     fi
 fi
 }
@@ -120,13 +120,13 @@ fi
 vim() {
 if [ $# == 0 ]
 then
-    /Applications/MacVim.app/Contents/MacOS/Vim 
-else 
+    /Applications/MacVim.app/Contents/MacOS/Vim
+else
     if [ "$1" == "-" ]
-    then 
+    then
     /Applications/MacVim.app/Contents/MacOS/Vim -
-    else 
-    /Applications/MacVim.app/Contents/MacOS/Vim "$@" 
+    else
+    /Applications/MacVim.app/Contents/MacOS/Vim "$@"
     fi
 fi
 }
@@ -134,3 +134,4 @@ fi
 complete -cf sudo
 
 source ~/.bash_vcs
+source ~/.cider.profile
