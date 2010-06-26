@@ -4,8 +4,6 @@ set autochdir
 set nostartofline " don't jump to the first character when paging
 set title
 set backspace=indent,eol,start " allow backspacing over everything in insert mode
-set nowb
-set noswapfile
 set ttyfast
 let mapleader = ','
 let g:mapleader = ','
@@ -62,9 +60,9 @@ set sessionoptions=blank,buffers,curdir,folds,globals,help,localoptions,options,
 set imd
 set wildmenu
 set wildmode=list:longest,full
-set wildignore+=*.o,*~,.lo
-set iskeyword+=$,@,%,# " none of these are word dividers
-set iskeyword-=_,. " these are word dividers
+set wildignore+=*.o,*~,.lo,*.pyc,*.bak,*.jpg,*.png,*.gif
+"set iskeyword+=$,@,%,# " none of these are word dividers
+"set iskeyword-=_,. " these are word dividers
 set whichwrap=b,s,h,l,<,>,~,[,] "everything wraps
 set undolevels=1000
 set autoindent
@@ -246,16 +244,9 @@ endfunction
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " BACKUPS
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-silent execute '!mkdir -p ~/.vim_backups'
-set backupdir=~/.vim_backups//
-set directory=~/.vim_backups//
-if has("vms")
-    set nobackup
-else
-    set backup
-endif
 set nowb
 set noswapfile
+set nobackup
 set viminfo=%100,'100,/100,h,\"500,:100,n~/.viminfo
 set history=500
 set updatecount=100
@@ -469,19 +460,25 @@ inoremap $q ''<esc>i
 inoremap $e ""<esc>i
 
 " Mappings for cope
-map <leader>cc :botright cope<CR>
-map <leader>n :cn<CR>
-map <leader>p :cp<CR>
-map <leader>ll :ll<CR>
+nmap <leader>cc :botright cope<CR>
+nmap <leader>n :cn<CR>
+nmap <leader>p :cp<CR>
+nmap <leader>ll :ll<CR>
 
 " Mapping for tabs/buffers
-map gz :bdelete<CR>
-map gb :bnext<CR>
-map gB :bprev<CR>
+nmap gz :bdelete<CR>
+nmap gb :bnext<CR>
+nmap gB :bprev<CR>
+nmap <leader>clearall :1,3000bd<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " PLUGIN SETTINGS
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" DelimitMate
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let b:delimitMate_quotes = "\" ' ` *"
+"au FileType python let b:delimitMate_quotes += '""" " \' `'
 
 " PyDiction
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
