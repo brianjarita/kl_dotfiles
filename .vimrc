@@ -19,7 +19,6 @@ set ruler
 set number
 set showcmd
 set laststatus=2
-set complete=.,w,b,u,U,t,i,d,s,k
 filetype plugin indent on
 set winminheight=0
 set winminwidth=0
@@ -475,9 +474,10 @@ nmap <leader>clear :1,3000bd<CR>
 " PLUGIN SETTINGS
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" DelimitMate
+" Supertab
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
+let g:SuperTabDefaultCompletionType='context'
+let g:SuperTabMappingTabLiteral='<a-tab>'
 
 " PyDiction
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
