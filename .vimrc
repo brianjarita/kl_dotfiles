@@ -43,8 +43,10 @@ set modeline
 set modelines=5
 set tabpagemax=100
 set mousemodel=extend
+set mouse=a
+set ttymouse=xterm2
 set noea
-set shortmess=aOstT " shortens messages to avoid 'press a key' prompt
+set shortmess=aOstTI " shortens messages to avoid 'press a key' prompt
 set magic
 set viminfo='10,\"100,:20,%,n~/.viminfo
 set confirm
@@ -109,6 +111,7 @@ set showtabline=1
 " COLORS
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 syntax on
+set t_Co=256
 colorscheme wombat256
 set background=dark
 hi NonText ctermfg=7 guifg=gray
@@ -131,6 +134,7 @@ let python_highlight_all=1
 set laststatus=2
 
 set statusline=%-.50F " Full path to file, 50 characters max
+set statusline+=\ %{fugitive#statusline()} " Fugitive status line
 set statusline+=\ (%n) " buffer number
 set statusline+=\ %([%M%R%H%W]\ %) " Modified, Read-only, Help, and Preview flags
 set statusline+=\ %y " Filetype
@@ -152,7 +156,6 @@ autocmd cursorhold,bufwritepost * unlet! b:statusline_tab_warning
 autocmd cursorhold,bufwritepost * unlet! b:statusline_trailing_space_warning
 autocmd cursorhold,bufwritepost * unlet! b:statusline_long_line_warning
 
-" return '[&et]' if &et is set wrong
 " return '[mixed]' if spaces and tabs are used to indent
 " return an empty string if everything is fine
 function! StatuslineTabWarning()
@@ -162,8 +165,6 @@ function! StatuslineTabWarning()
 
         if tabs && spaces
             let b:statusline_tab_warning = '[mixed]'
-        elseif (spaces && !&et) || (tabs && !&et)
-            let b:statusline_tab_warning = '[&et]'
         else
             let b:statusline_tab_warning = ''
         endif
@@ -475,32 +476,9 @@ nmap <leader>clear :1,3000bd<CR>
 " PLUGIN SETTINGS
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" NeoComplCache
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:neocomplcache_enable_at_startup = 1
-let g:neocomplcache_enable_smart_case = 1
-let g:neocomplcache_enable_camel_case_completion = 1
-let g:neocomplcache_max_list = 10
-
-" Recommended key-mappings.  <CR>: close popup and save indent.
-inoremap <expr><CR>  (pumvisible() ? "\<C-y>":'') . "\<C-f>\<CR>X\<BS>"
-" <TAB>: completion.
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-" <C-h>, <BS>: close popup and delete backword char.
-inoremap <expr><C-h> pumvisible() ? neocomplcache#close_popup()."\<C-h>" : "\<C-h>"
-inoremap <expr><BS> pumvisible() ? neocomplcache#close_popup()."\<C-h>" : "\<C-h>"
-inoremap <expr><C-y>  neocomplcache#close_popup()
-inoremap <expr><C-e>  neocomplcache#cancel_popup()
-" key-mappings
-imap <C-k>     <Plug>(neocomplcache_snippets_expand)
-smap <C-k>     <Plug>(neocomplcache_snippets_expand)
-inoremap <expr><C-g>     neocomplcache#undo_completion()
-inoremap <expr><C-l>     neocomplcache#complete_common_string()
-
 " DelimitMate
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let b:delimitMate_quotes = "\" ' ` *"
-"au FileType python let b:delimitMate_quotes += '""" " \' `'
+
 
 " PyDiction
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -652,7 +630,14 @@ nmap <Leader>gc :Gcommit<CR>
 
 " SCRATCH BUFFER
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-nmap <Leader>S :Sscratch<CR>
+function! s:ToggleScratch()
+    if expand('%') == g:ScratchBufferName
+        quit
+    else
+        Sscratch
+    endif
+endfunction
+nmap <Leader>S :call <SID>ToggleScratch()<CR>
 
 " BUFEXPLORER
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

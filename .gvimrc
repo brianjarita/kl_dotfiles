@@ -18,7 +18,7 @@ highlight SpecialKey guifg=#4a4a59
 "hi CursorLine gui=underline
 "set cursorline
 "set cursorcolumn
-colorscheme mdark
+"colorscheme mdark
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " GUI SETTINGS
