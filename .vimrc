@@ -111,7 +111,6 @@ set showtabline=1
 " COLORS
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 syntax on
-set t_Co=256
 colorscheme wombat256
 set background=dark
 hi NonText ctermfg=7 guifg=gray
