@@ -333,7 +333,7 @@ if has("autocmd")
 
     if version >= 700
         autocmd FileType python set omnifunc=pythoncomplete#Complete
-        autocmd FileType css set omnifunc=csscomplete#CompleteCSS
+        autocmd FileType css,sass set omnifunc=csscomplete#CompleteCSS
     endif
 
     " CSS, XML, and HTML file shoulds be folded based on indent
@@ -341,6 +341,7 @@ if has("autocmd")
 
     " CSS and Sass files should see - as part of a keyword
     autocmd FileType css,sass set iskeyword +=-
+    au! BufRead,BufNewFile *.sass,*.scss setfiletype sass
 
 endif
 
