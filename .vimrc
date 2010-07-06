@@ -792,15 +792,18 @@ let g:makeprg_django_app = 'python\ manage.py\ test'
 let g:makeprg_django_project = 'python\ manage.py\ test'
 set errorformat=%C\ %.%#,%A\ \ File\ \"%f\"\\,\ line\ %l%.%#,%Z%[%^\ ]%\\@=%m
 
-command! -nargs=* Manage call GetManageLocation()<CR>
-function! GetManageLocation()
-    "sitename=`pwd | awk -F\/ '{ print $2 }'`
-    "find /Sites/$sitename -name filename
-    "let sitename = system("pwd | awk -F\/ '{ print $2 }'")
-    let sitename = system("pwd | awk -F\/ '{ print $3 }'")
-    let managepath = substitute("/Sites/%s/", "/\%s/", "sitename")
-    echo managepath
+function! FindDjangoManageFile()
+   let expandstr = '%:p:h' " dirname
+   while expand(expandstr) != '/'
+       let testpath = expand(expandstr)
+       if len(getfperm(testpath . '/manage.py')) > 0
+           let g:makeprg_django_project = testpath . '/manage.py'
+           return
+       endif
+       let expandstr .= ':h'
+   endwhile
 endfunction
+
 
 function! RunTestsForFile(args)
     if @% =~ '\.py$'
@@ -870,5 +873,5 @@ endfunction
 
 command! -nargs=* Tests call RunTests('', '')<CR>redraw<CR>call JumpToError()<CR>
 command! -nargs=* FileTests call RunTestsForFile('--failfast')<CR>redraw<CR>call JumpToError()<CR>
-"nnoremap <leader>A :call RunTests('', '')<cr>:redraw<cr>:call JumpToError()<cr>
-"nnoremap <leader>Y :call RunTestsForFile('--failfast')<cr>:redraw<cr>:call JumpToError()<cr>
+nnoremap <leader>a :call FindDjangoManageFile()<cr>:call RunTests('', '')<cr>:redraw<cr>:call JumpToError()<cr>
+nnoremap <leader>A :call FindDjangoManageFile()<cr>:call RunTestsForFile('--failfast')<cr>:redraw<cr>:call JumpToError()<cr>
