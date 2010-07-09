@@ -471,6 +471,9 @@ nmap gb :bnext<CR>
 nmap gB :bprev<CR>
 nmap <leader>clear :1,3000bd<CR>
 
+" Sort CSS files alphabetically
+nmap sort :g#\({\n\)\@<=#.,/}/sort<CR>
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " PLUGIN SETTINGS
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
