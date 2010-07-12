@@ -343,6 +343,12 @@ if has("autocmd")
     autocmd FileType css,sass set iskeyword +=-
     au! BufRead,BufNewFile *.sass,*.scss setfiletype sass
 
+    " Git WIP
+    augroup git-wip
+        autocmd!
+        autocmd BufWritePost * :silent !git wip save "WIP from vim" --editor -- "%"
+    augroup END
+
 endif
 
 
@@ -483,12 +489,13 @@ nmap sort :g#\({\n\)\@<=#.,/}/sort<CR>
 let g:SuperTabDefaultCompletionType='context'
 let g:SuperTabMappingTabLiteral='<a-tab>'
 
-" PyDiction
+" XPTemplates
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:pydiction_location="/Users/kennethlove/.vim/ftplugin/python/pydiction/complete-dict"
-if has("autocmd")
-    autocmd FileType python set complete+=k/Users/kennethlove/.vim/ftplugin/python/pydiction iskeyword+=.,(
-endif
+let g:SuperTabMappingForward='<Plug>supertabKey' " avoid key conflict
+let g:xptemplate_fallback='<Plug>supertabKey' " if no matches in XPT, use SuperTab
+let g:xptemplate_key='<tab>' " make XPT use <tab> for the trigger
+let g:xptemplate_pum_tab_nav=1 " use <tab>/<s-tab> to navigate through pum. Optional
+let g:xptemplate_minimal_prefix='full' " XPT triggers only when you typed whole name of a snippet. Optional
 
 " MATCHIT
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
