@@ -484,6 +484,9 @@ nmap sort :g#\({\n\)\@<=#.,/}/sort<CR>
 " PLUGIN SETTINGS
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+" ConqueTerm
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 " Supertab
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:SuperTabDefaultCompletionType='context'
@@ -491,11 +494,8 @@ let g:SuperTabMappingTabLiteral='<a-tab>'
 
 " XPTemplates
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:SuperTabMappingForward='<Plug>supertabKey' " avoid key conflict
-let g:xptemplate_fallback='<Plug>supertabKey' " if no matches in XPT, use SuperTab
-let g:xptemplate_key='<tab>' " make XPT use <tab> for the trigger
-let g:xptemplate_pum_tab_nav=1 " use <tab>/<s-tab> to navigate through pum. Optional
-let g:xptemplate_minimal_prefix='full' " XPT triggers only when you typed whole name of a snippet. Optional
+let g:xptemplate_vars = "SParg="
+let g:xptemplate_brace_complete = ''
 
 " MATCHIT
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

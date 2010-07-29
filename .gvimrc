@@ -18,7 +18,7 @@ highlight SpecialKey guifg=#4a4a59
 "hi CursorLine gui=underline
 "set cursorline
 "set cursorcolumn
-"colorscheme mdark
+colorscheme birds_of_paradise
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " GUI SETTINGS
@@ -50,7 +50,7 @@ endif
 
 " Automatically enter fullscreen
 if has("gui_running")
-    set fuoptions+=maxvert,maxhorz
-    au GUIEnter * set fullscreen
+    "set fuoptions+=maxvert,maxhorz
+    "au GUIEnter * set fullscreen
 endif
 
