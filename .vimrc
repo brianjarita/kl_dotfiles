@@ -560,7 +560,7 @@ imap <D-/> <C-O>,c<space>
 
 " NERD_TREE
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-nmap <Leader>d :NERDTreeToggle<CR>
+nmap <Leader>d :NERDTreeFind<CR>
 let g:NERDChristmasTree = 1
 let g:NERDTreeQuitOnOpen = 1
 let g:NERDTreeWinPos = 'right'

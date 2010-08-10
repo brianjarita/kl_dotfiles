@@ -46,11 +46,12 @@ set guicursor+=n-v-c:blinkon0-Cursor
 if has("gui_macvim")
   set transparency=5
   set formatoptions-=tc
+  let macvim_hig_shift_movement = 1
 endif
 
 " Automatically enter fullscreen
 if has("gui_running")
-    "set fuoptions+=maxvert,maxhorz
-    "au GUIEnter * set fullscreen
+    set fuoptions+=maxvert,maxhorz
+    au GUIEnter * set fullscreen
 endif
 
