@@ -13,6 +13,11 @@ let leader = ','
 let g:leader = ','
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" PATHOGEN
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+call pathogen#runtime_append_all_bundles()
+"
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " DISPLAY
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set ruler
@@ -480,6 +485,9 @@ nmap <leader>clear :1,3000bd<CR>
 " Sort CSS files alphabetically
 nmap sort :g#\({\n\)\@<=#.,/}/sort<CR>
 
+" Rainbows!
+nmap <leader>R :RainbowParenthesesToggle<CR>
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " PLUGIN SETTINGS
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -512,13 +520,6 @@ let g:netrw_list_hide = '.*\.py[co]$,\.git$,\.swp$'
 let g:netrw_http_cmd = "wget -q -O" " or 'curl -Ls -o'
 let g:netrw_winsize = 10
 let g:netrw_alto = 1
-
-" PROJECT
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-nmap <silent> <Leader>P :Project<CR>
-let g:proj_window_width = 30
-let g:proj_window_increment = 15
-let g:proj_flags = "istbcLST"
 
 " LUSTYJUGGLER
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
