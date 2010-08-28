@@ -44,7 +44,7 @@ set guicursor+=n-v-c:blinkon0-Cursor
 " MACVIM SETTINGS
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 if has("gui_macvim")
-  set transparency=5
+  set transp=0
   set formatoptions-=tc
   let macvim_hig_shift_movement = 1
 endif

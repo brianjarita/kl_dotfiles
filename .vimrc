@@ -486,7 +486,7 @@ nmap <leader>clear :1,3000bd<CR>
 nmap sort :g#\({\n\)\@<=#.,/}/sort<CR>
 
 " Rainbows!
-nmap <leader>R :RainbowParenthesesToggle<CR>
+nmap <leader>r :RainbowParenthesesToggle<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " PLUGIN SETTINGS
@@ -657,6 +657,17 @@ let g:bufExplorerSplitBelow = 1
 let g:bufExplorerSplitRight = 1
 let g:bufExplorerDefaultHelp = 0
 let g:bufExplorerShowRelativePath = 1
+
+" MINIBUFEXPL
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:miniBufExplMapWindowNavVim = 1
+let g:miniBufExplMapWindowNavArrows = 1
+let g:miniBufExplMapCTabSwitchBufs = 1
+let g:miniBufExplModSelTarget = 1
+
+" TASKLIST
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+nmap <leader>T :TaskListToggle<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " FUNCTIONS
