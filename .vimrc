@@ -1,3 +1,10 @@
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" PATHOGEN
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set filetype off
+call pathogen#helptags()
+call pathogen#runtime_append_all_bundles()
+
 set nocompatible
 set cpoptions=aABceFsmq
 set autochdir
@@ -12,11 +19,6 @@ let g:localleader = ','
 let leader = ','
 let g:leader = ','
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" PATHOGEN
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-call pathogen#runtime_append_all_bundles()
-"
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " DISPLAY
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -299,7 +301,7 @@ if has("autocmd")
     autocmd FileType html.django_template setlocal ts=4 sts=4 sw=4 noexpandtab
     autocmd FileType htmldjango setlocal ts=4 sts=4 sw=4 noexpandtab
     autocmd FileType css setlocal ts=2 sts=2 sw=2 expandtab
-    autocmd FileType javascript setlocal ts=4 sts=4 sw=4 noexpandtab
+    autocmd FileType javascript setlocal ts=4 sts=4 sw=4 expandtab
     autocmd FileType python setlocal ts=4 sts=4 sw=4 expandtab nocindent
 
     " Treat .rss files as XML
@@ -353,6 +355,11 @@ if has("autocmd")
         autocmd!
         autocmd BufWritePost * :silent !git wip save "WIP from vim" --editor -- "%"
     augroup END
+
+    " USE GOOGLE'S JAVASCRIPT LINTER
+    """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+    au BufNewFile,BufRead *.js set makeprg=gjslint\ %
+    au BufNewFile,BufRead *.js set errorformat=%-P-----\ FILE\ \ :\ \ %f\ -----,Line\ %l\\,\ E:%n:\ %m,%-Q,%-GFound\ %s,%-GSome\ %s,%-Gfixjsstyles%s,%-Gscript\ can\ %s,%-G
 
 endif
 
