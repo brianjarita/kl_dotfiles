@@ -91,6 +91,7 @@ set listchars=tab:▸\ ,eol:¬,trail:-
 set showbreak=…
 set encoding=utf-8 fileencodings=.
 set showfulltag
+set completeopt=longest,menuone
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " FOLDS
@@ -341,6 +342,8 @@ if has("autocmd")
     if version >= 700
         autocmd FileType python set omnifunc=pythoncomplete#Complete
         autocmd FileType css,sass set omnifunc=csscomplete#CompleteCSS
+        autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
+        set ofu=syntaxcomplete#Complete
     endif
 
     " CSS, XML, and HTML file shoulds be folded based on indent
@@ -367,6 +370,11 @@ endif
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " KEY MAPPINGS
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Omnicompletion keymappings
+inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+inoremap <expr> <C-n> pumvisible() ? '<C-n>' : '<C-n><C-r>=pumvisible() ? "\<Down>" : ""<CR>'
+inoremap <expr> <M-,> pumvisible() ? '<C-n>' : '<C-x><C-o><C-n><C-p><C-r>=pumvisible() ? "\<Down>" : ""<CR>'
+
 " CD to directory of current file
 map <Leader>cd :cd %:p:h<CR>
 
