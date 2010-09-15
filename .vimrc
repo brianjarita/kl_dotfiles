@@ -263,7 +263,7 @@ set updatecount=100
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 if v:version >= 700
     setlocal spell spelllang=en_us
-    nmap <LocalLeader>ss :set spell!<CR>
+    nmap <localleader>ss :set spell!<CR>
 endif
 try
     lang en_US
@@ -424,7 +424,7 @@ cmap w!! %!sudo tee > /dev/null %
 nmap Q gq
 
 " Turn hidden characters on/off
-nmap <silent> <LocalLeader>s :set nolist!<CR>
+nmap <silent> <localleader>s :set nolist!<CR>
 
 " Up/down go visually instead of by physical lines
 " Interactive ones need to check whether we're in the autocomplete popup
@@ -468,22 +468,6 @@ nmap * *zzzv
 nmap # #zzzv
 nmap g* g*zzzv
 nmap g# g#zzzv
-
-" Parenthesis/bracket expanding
-vnoremap $1 <esc>`>a)<esc>`<i(<esc>
-vnoremap $2 <esc>`>a]<esc>`<i[<esc>
-vnoremap $3 <esc>`>a}<esc>`<i{<esc>
-vnoremap $$ <esc>`>a"<esc>`<i"<esc>
-vnoremap $q <esc>`>a'<esc>`<i'<esc>
-vnoremap $e <esc>`>a"<esc>`<i"<esc>
-
-" Map auto complete of (, ", ', [
-inoremap $1 ()<esc>i
-inoremap $2 []<esc>i
-inoremap $3 {}<esc>i
-inoremap $4 {<esc>o}<esc>O
-inoremap $q ''<esc>i
-inoremap $e ""<esc>i
 
 " Mappings for cope
 nmap <leader>cc :botright cope<CR>
@@ -700,16 +684,6 @@ function! s:HighlightLongLines(width)
     endif
 endfunction
 nmap <leader>h :HighlightLongLines<CR>
-
-" CREATE WORDPROCESSING MODE
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-cabbr wp call Wp()
-fun! Wp()
-  set lbr
-  source /Users/kennethlove/.vim/autocorrect/autocorrect.vim
-  set nonumber
-  set spell spelllang=en_us
-endfu
 
 " SEARCH FOR VISUAL SELECTION
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
