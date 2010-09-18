@@ -97,6 +97,7 @@ set completeopt=longest,menuone
 " FOLDS
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "set foldmethod=indent
+set foldmethod=marker
 set foldenable
 set foldopen=block,hor,mark,percent,quickfix,tag
 set foldminlines=2
@@ -364,6 +365,10 @@ if has("autocmd")
     au BufNewFile,BufRead *.js set makeprg=gjslint\ %
     au BufNewFile,BufRead *.js set errorformat=%-P-----\ FILE\ \ :\ \ %f\ -----,Line\ %l\\,\ E:%n:\ %m,%-Q,%-GFound\ %s,%-GSome\ %s,%-Gfixjsstyles%s,%-Gscript\ can\ %s,%-G
 
+    " SAVE FILES WHEN VIM LOSES FOCUS
+    """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+    au FocusLost *.htm*,*.js,*.css :wa
+
 endif
 
 
@@ -548,8 +553,8 @@ nnoremap <silent> <Leader>t :TlistToggle<CR>
 
 " RAGTAG
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-inoremap <M-o>       <Esc>o
-inoremap <C-j>       <Down>
+inoremap <M-o> <Esc>o
+inoremap <C-j> <Down>
 let g:ragtag_global_maps = 1
 
 " NERD_COMMENTER
