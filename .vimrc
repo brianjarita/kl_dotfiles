@@ -26,7 +26,6 @@ set ruler
 set number
 set showcmd
 set laststatus=2
-filetype plugin indent on
 set winminheight=0
 set winminwidth=0
 set winheight=10
@@ -294,10 +293,8 @@ cno $q <C-\>eDeleteTilSlash()<CR>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " SETTINGS PER FILETYPE
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+filetype plugin indent on
 if has("autocmd")
-    " Enable file type detection
-    filetype plugin indent on
-
     " Syntax of these languages is fussy over tabs Vs spaces
     autocmd FileType make setlocal ts=8 sts=8 sw=8 noexpandtab
     autocmd FileType yaml setlocal ts=4 sts=4 sw=4 expandtab
