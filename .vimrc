@@ -35,6 +35,7 @@ set textwidth=0
 set columns=90
 set wrapmargin=10
 set numberwidth=5
+set relativenumber
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " BEHAVIOR
@@ -121,6 +122,7 @@ set showtabline=1
 syntax on
 colorscheme wombat256
 set background=dark
+set colorcolumn=85
 hi NonText ctermfg=7 guifg=gray
 hi SpecialKey ctermfg=8
 
@@ -280,6 +282,9 @@ set infercase
 set hlsearch
 set showmatch
 set diffopt=filler,iwhite
+nnoremap / /\v
+vnoremap / /\v
+set gdefault
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " COMMAND-LINE
@@ -422,6 +427,8 @@ map <D-S-Right> <C-W>l
 
 map <D-0> <C-W>= " make Command-0 equal windows
 
+nnoremap <leader>w <C-w>v<C-w>l
+
 " If I forgot to sudo a file, do that with :w!!
 cmap w!! %!sudo tee > /dev/null %
 
@@ -441,15 +448,16 @@ map <down> gj
 " Map normal mode Enter to add a new line before the current one
 nmap <Enter> O<Esc>
 
-" map F1 to open previous buffer
-map <F1> :previous<CR>
-" map F2 to open next buffer
-map <F2> :next<CR>
-" fast open a buffer by search for a name
-map <c-q> :sb
+" Makes ; work for :
+nnoremap ; :
 
 " Makes W send w when it's a command
 command! W w
+
+" Deactivate the default F1 behavior of launching VIM help.
+inoremap <F1> <ESC>
+nnoremap <F1> <ESC>
+vnoremap <F1> <ESC>
 
 " bind command-]/command-[ to act like TextMate
 nmap <D-]> >>
@@ -491,6 +499,21 @@ nmap sort :g#\({\n\)\@<=#.,/}/sort<CR>
 
 " Rainbows!
 nmap <leader>r :RainbowParenthesesToggle<CR>
+
+" Make <leader>ft fold an HTML tag
+nnoremap <leader>ft Vatzf
+
+" Sort CSS properties
+nnoremap <leader>S ?{<CR>jV/^\s*\}?$<CR>k:sort<CR>:noh<CR>
+
+" Reselect just-pasted text
+nnoremap <leader>v V`]
+
+" In addition to <esc>, jj will exit to normal mode.
+inoremap jj <ESC>
+
+" Launch Ack quicker
+nnoremap <leader>a :Ack
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " PLUGIN SETTINGS
@@ -579,7 +602,8 @@ let g:NERDTreeShowLineNumbers = 1
 
 " YANKRING
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-nnoremap <silent> <Leader>y :YRShow<CR>
+nnoremap <silent> <F3> :YRShow<CR>
+inoremap <silent> <F3> <ESC>:YRShow<CR>
 "
 " skip all single-letter deletes (x)
 let g:yankring_min_element_length = 2
@@ -652,7 +676,7 @@ function! s:ToggleScratch()
         Sscratch
     endif
 endfunction
-nmap <Leader>S :call <SID>ToggleScratch()<CR>
+nmap <leader><tab> :call <SID>ToggleScratch()<CR>
 
 " BUFEXPLORER
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -889,5 +913,5 @@ endfunction
 
 command! -nargs=* Tests call RunTests('', '')<CR>redraw<CR>call JumpToError()<CR>
 command! -nargs=* FileTests call RunTestsForFile('--failfast')<CR>redraw<CR>call JumpToError()<CR>
-nnoremap <leader>a :call FindDjangoManageFile()<cr>:call RunTests('', '')<cr>:redraw<cr>:call JumpToError()<cr>
-nnoremap <leader>A :call FindDjangoManageFile()<cr>:call RunTestsForFile('--failfast')<cr>:redraw<cr>:call JumpToError()<cr>
+nnoremap <leader>ta :call FindDjangoManageFile()<cr>:call RunTests('', '')<cr>:redraw<cr>:call JumpToError()<cr>
+nnoremap <leader>TA :call FindDjangoManageFile()<cr>:call RunTestsForFile('--failfast')<cr>:redraw<cr>:call JumpToError()<cr>

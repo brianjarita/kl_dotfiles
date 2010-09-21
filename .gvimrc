@@ -15,10 +15,8 @@ set gfn=Anonymous\ Pro:h12
 highlight NonText guifg=#4a4a59
 highlight SpecialKey guifg=#4a4a59
 
-"hi CursorLine gui=underline
-"set cursorline
-"set cursorcolumn
-colorscheme birds_of_paradise
+"colorscheme birds_of_paradise
+colorscheme clouds_dark
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " GUI SETTINGS
