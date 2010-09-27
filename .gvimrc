@@ -11,12 +11,12 @@ set columns=160
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set gfn=Anonymous\ Pro:h12
 
+"colorscheme birds_of_paradise
+colorscheme twilight
+
 "Invisible character colors
 highlight NonText guifg=#4a4a59
 highlight SpecialKey guifg=#4a4a59
-
-"colorscheme birds_of_paradise
-colorscheme clouds_dark
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " GUI SETTINGS

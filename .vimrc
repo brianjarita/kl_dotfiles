@@ -1,7 +1,7 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " PATHOGEN
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set filetype off
+filetype off
 call pathogen#helptags()
 call pathogen#runtime_append_all_bundles()
 
@@ -60,7 +60,7 @@ set report=0
 set smartcase
 
 " Saving sessions
-set sessionoptions=blank,buffers,curdir,folds,globals,help,localoptions,options,resize,tabpages,winsize,winpos
+set sessionoptions=buffers,folds,tabpages
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " TEXT EDITING
@@ -69,8 +69,6 @@ set imd
 set wildmenu
 set wildmode=list:longest,full
 set wildignore+=*.o,*~,.lo,*.pyc,*.bak,*.jpg,*.png,*.gif
-"set iskeyword+=$,@,%,# " none of these are word dividers
-"set iskeyword-=_,. " these are word dividers
 set whichwrap=b,s,h,l,<,>,~,[,] "everything wraps
 set undolevels=1000
 set autoindent
@@ -97,7 +95,7 @@ set completeopt=longest,menuone
 " FOLDS
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "set foldmethod=indent
-set foldmethod=marker
+set foldmethod=manual
 set foldenable
 set foldopen=block,hor,mark,percent,quickfix,tag
 set foldminlines=2
@@ -135,6 +133,9 @@ autocmd BufWinLeave * call clearmatches()
 
 " full Python syntax highlighting
 let python_highlight_all=1
+
+" use brief mode for Javascript indenter
+let g:SimpleJsIndenter_BriefMode = 1
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " STATUS LINE
@@ -293,7 +294,8 @@ cno $q <C-\>eDeleteTilSlash()<CR>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " SETTINGS PER FILETYPE
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-filetype plugin indent on
+filetype plugin on
+filetype indent on
 if has("autocmd")
     " Syntax of these languages is fussy over tabs Vs spaces
     autocmd FileType make setlocal ts=8 sts=8 sw=8 noexpandtab
@@ -338,15 +340,17 @@ if has("autocmd")
 
     autocmd BufEnter * :syntax sync fromstart
 
-    " mapping to make HTML files Django-highlighted
-    autocmd BufEnter *html nmap <F6> :setfiletype htmldjango<CR>
-    autocmd BufEnter *html nmap <S-F6> :setfiletype django<CR>
+    autocmd BufRead *.html set filetype=htmldjango
+    autocmd BufRead *.py set smartindent cinwords=if,else,elif,for,while,try,except,finally,def,class
+    autocmd BufRead *.py set iskeyword+=.
+
+    " mapping to mark HTML5 files
+    autocmd BufEnter *html nmap <F7> :setfiletype html5<CR>
 
     if version >= 700
         autocmd FileType python set omnifunc=pythoncomplete#Complete
         autocmd FileType css,sass set omnifunc=csscomplete#CompleteCSS
         autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
-        set ofu=syntaxcomplete#Complete
     endif
 
     " CSS, XML, and HTML file shoulds be folded based on indent
@@ -512,22 +516,21 @@ inoremap jj <ESC>
 " Launch Ack quicker
 nnoremap <leader>a :Ack
 
+" Use - to open Explore
+nnoremap - :Explore<CR>
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " PLUGIN SETTINGS
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" ConqueTerm
+" SUPERTAB
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:SuperTabDefaultCompletionType = 'context'
+let g:SuperTabMappingTabLiteral = '<a-tab>'
 
-" Supertab
+" PYDICTION
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:SuperTabDefaultCompletionType='context'
-let g:SuperTabMappingTabLiteral='<a-tab>'
-
-" XPTemplates
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:xptemplate_vars = "SParg="
-let g:xptemplate_brace_complete = ''
+let g:pydiction_location = "~/.vim/bundle/pydiction/complete-dict"
 
 " MATCHIT
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -569,7 +572,7 @@ let Tlist_Show_Menu = 1
 let Tlist_GainFocus_On_ToggleOpen = 1
 let Tlist_Close_On_Select = 1
 let Tlist_Auto_Update = 1
-nnoremap <silent> <Leader>t :TlistToggle<CR>
+nnoremap <silent> <Leader>T :TlistToggle<CR>
 
 " RAGTAG
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -657,7 +660,7 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_quiet_warnings = 0
 
 " ignore djangohtml
-let g:syntastic_disabled_filetypes = ['htmldjango', 'txt', 'text', 'tumblr', 'css']
+let g:syntastic_disabled_filetypes = ['htmldjango', 'txt', 'text', 'tumblr', 'css', 'html5']
 
 " FUGITIVE
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -689,10 +692,6 @@ let g:miniBufExplMapWindowNavVim = 1
 let g:miniBufExplMapWindowNavArrows = 1
 let g:miniBufExplMapCTabSwitchBufs = 1
 let g:miniBufExplModSelTarget = 1
-
-" TASKLIST
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-nmap <leader>T :TaskListToggle<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " FUNCTIONS
