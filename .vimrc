@@ -525,7 +525,7 @@ nnoremap - :Explore<CR>
 
 " SUPERTAB
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:SuperTabDefaultCompletionType = 'context'
+let g:SuperTabDefaultCompletionType = '<c-x><c-o>'
 let g:SuperTabMappingTabLiteral = '<a-tab>'
 
 " PYDICTION
