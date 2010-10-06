@@ -27,6 +27,14 @@ alias stop_mysql="sudo launchctl unload -w /Library/LaunchDaemons/com.mysql.mysq
 alias start_postgres="/usr/local/pgsql/bin/pg_ctl -D /usr/local/pgsql/data -l logfile start"
 alias stop_postgres="/usr/local/pgsql/bin/pg_ctl -D /usr/local/pgsql/data -l logfile stop"
 
+# Python/Django
+alias pm="python manage.py"
+alias sm="python manage.py schemamigration"
+alias m="python manage.py migrate"
+alias pys="python manage.py runserver"
+alias pysp="python manage.py runserver_plus"
+alias create_app="touch __init__.py admin.py models.py tests.py views.py urls.py"
+
 export HISTIGNORE=""
 export HISTSIZE=1048576
 export HISTFILESIZE=1048576 #Max size of 1 MB (proper)
