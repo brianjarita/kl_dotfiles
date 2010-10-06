@@ -699,6 +699,17 @@ let g:miniBufExplModSelTarget = 1
 " FUNCTIONS
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+" TOGGLE LINE NUMBER MODE
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+function! g:ToggleNuMode()
+    if (&rnu == 1)
+        set nu
+    else
+        set rnu
+    endif
+endfunc
+nnoremap <leader>l :call g:ToggleNuMode()<CR>
+
 " HIGHLIGHT LONG LINES
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 command! -nargs=? HighlightLongLines call s:HighlightLongLines('<args>')
