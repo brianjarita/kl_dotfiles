@@ -119,7 +119,7 @@ set showtabline=1
 syntax on
 colorscheme wombat256
 set background=dark
-set colorcolumn=85
+set colorcolumn=80
 hi NonText ctermfg=7 guifg=gray
 hi SpecialKey ctermfg=8
 
@@ -467,7 +467,7 @@ vmap <D-]> >gv
 vmap <D-[> <gv
 
 " Toggle search highlight
-nnoremap <silent> <Leader>ts :silent :set invhlsearch<CR>:set hlsearch?<CR>
+nnoremap <silent> \ :silent :set invhlsearch<CR>:set hlsearch?<CR>
 
 " Folds
 nnoremap <silent> <Space> @=(foldlevel('.')?'za':'l')<CR>
@@ -572,6 +572,8 @@ let Tlist_Show_Menu = 1
 let Tlist_GainFocus_On_ToggleOpen = 1
 let Tlist_Close_On_Select = 1
 let Tlist_Auto_Update = 1
+let Tlist_Show_One_File = 1
+
 nnoremap <silent> <Leader>T :TlistToggle<CR>
 
 " RAGTAG
