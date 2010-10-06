@@ -1,77 +1,91 @@
 #!/bin/bash
 
 __vcs_dir() {
-	local vcs base_dir sub_dir ref
-	sub_dir() {
-	  local sub_dir
-	  sub_dir=$(stat -f "${PWD}")
-	  sub_dir=${sub_dir#$1}
-	  echo ${sub_dir#/}
-	}
+    local vcs base_dir sub_dir ref
+    sub_dir() {
+        local sub_dir
+        sub_dir=$(stat -f "${PWD}")
+        sub_dir=${sub_dir#$1}
+        echo ${sub_dir#/}
+    }
 
-	git_dir() {
-		base_dir=$(git rev-parse --show-cdup 2>/dev/null) || return 1
-		if [ -n "$base_dir" ]; then 
-			base_dir=`cd $base_dir; pwd`
-		else 
-			base_dir=$PWD 
-		fi
-		sub_dir=$(git rev-parse --show-prefix)
-		sub_dir="/${sub_dir%/}"
-		ref=$(git symbolic-ref -q HEAD || git name-rev --name-only HEAD 2>/dev/null)
-		ref=${ref#refs/heads/}
-		vcs="git"
-		base_dir="$(basename "${base_dir}")"
-	}
+    git_dir() {
+        base_dir=$(git rev-parse --show-cdup 2>/dev/null) || return 1
+        if [ -n "$base_dir" ]; then 
+            base_dir=`cd $base_dir; pwd`
+        else 
+            base_dir=$PWD 
+        fi
+        sub_dir=$(git rev-parse --show-prefix)
+        sub_dir="/${sub_dir%/}"
+        ref=$(git symbolic-ref -q HEAD || git name-rev --name-only HEAD 2>/dev/null)
+        ref=${ref#refs/heads/}
+        vcs="git"
+        base_dir="$(basename "${base_dir}")"
+    }
 
-	svn_dir() {
-		[ -d ".svn" ] || return 1
-		base_dir="."
-		while [ -d "$base_dir/../.svn" ]; do base_dir="$base_dir/.."; done
-		base_dir=`cd $base_dir; pwd`
-		sub_dir="/$(sub_dir "${base_dir}")"
-		ref=$(svn info "$base_dir" | awk '/^URL/ { sub(".*/","",$0); r=$0 } /^Revision/ { sub("[^0-9]*","",$0); print r":"$0 }')
-		vcs="svn"
-	 	base_dir="$(basename "${base_dir}")"
-	}
+    svn_dir() {
+        [ -d ".svn" ] || return 1
+        base_dir="."
+        while [ -d "$base_dir/../.svn" ]; do base_dir="$base_dir/.."; done
+        base_dir=`cd $base_dir; pwd`
+        sub_dir="/$(sub_dir "${base_dir}")"
+        ref=$(svn info "$base_dir" | awk '/^URL/ { sub(".*/","",$0); r=$0 } /^Revision/ { sub("[^0-9]*","",$0); print r":"$0 }')
+        vcs="svn"
+        base_dir="$(basename "${base_dir}")"
+    }
 
     hg_dir() {
         [ -d ".hg" ] || return 1
-		base_dir="."
-		while [ ! -d "$base_dir/.hg" ]; do base_dir="$base_dir/.."; [ $(readlink -n "${base_dir}") = "/" ] && return 1; done
-		base_dir=$(readlink -n "$base_dir")
-		#base_dir=`cd $base_dir; pwd`
-		sub_dir=$(sub_dir "${base_dir}")
-		#ref=$(< "${base_dir}/.hg/branch")
-		vcs="hg"
-	}
-    
+        base_dir="."
+        while [ ! -d "$base_dir/.hg" ]; do base_dir="$base_dir/.."; [ $(readlink -n "${base_dir}") = "/" ] && return 1; done
+        base_dir=$(readlink -n "$base_dir")
+        #base_dir=`cd $base_dir; pwd`
+        sub_dir=$(sub_dir "${base_dir}")
+        #ref=$(< "${base_dir}/.hg/branch")
+        vcs="hg"
+    }
 
-	git_dir || svn_dir || hg_dir
-	
-	if [ -n "$vcs" ]; then
-		__vcs_prefix="($vcs)"
-		__vcs_base_dir="${base_dir/$HOME/~}"
-		__vcs_ref="[$ref]"
-		__vcs_sub_dir="${sub_dir}"
-	else
-		__vcs_prefix=''
-		__vcs_base_dir="${PWD/$HOME/~}"
-		__vcs_ref=''
-		__vcs_sub_dir=''
-	fi
-}
 
-function parse_git_dirty {
-  [[ $(git status 2> /dev/null | tail -n1) != "nothing to commit (working directory clean)" ]] && echo "*"
-}
-function parse_git_branch {
-  git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e "s/* \(.*\)/[\1$(parse_git_dirty)]/"
+    git_dir || svn_dir || hg_dir
+
+    if [ -n "$vcs" ]; then
+        __vcs_prefix="($vcs)"
+        __vcs_base_dir="${base_dir/$HOME/~}"
+        __vcs_ref="[$ref]"
+        __vcs_sub_dir="${sub_dir}"
+    else
+        __vcs_prefix=''
+        __vcs_base_dir="${PWD/$HOME/~}"
+        __vcs_ref=''
+        __vcs_sub_dir=''
+    fi
 }
 
 PROMPT_COMMAND=__vcs_dir
-#PS1='\u:$__vcs_prefix\[${_bold}\]${__vcs_base_dir}\[${_normal}\]${__vcs_ref}\[${_bold}\]${__vcs_sub_dir}\[${_normal}\]\$ '
 
-# PS1='\A \[\033[1;37m\]${__vcs_base_dir}\[\033[0m\] \[\033[0;32m\]$__vcs_prefix\[\033[0m\] \[\033[0;33m\]${__vcs_ref}\[\033[0m\] ${__vcs_sub_dir} : '
+# COLORS
+D=$'\e[37;40m'
+PINK=$'\e[35;40m'
+GREEN=$'\e[32;40m'
+ORANGE=$'\e[33;40m'
 
-PS1='\A \[\033[1;37m\]${__vcs_base_dir}\[\033[0m\] \[\033[0;32m\]$__vcs_prefix\[\033[0m\] \[\033[0;33m\]$(parse_git_branch)\[\033[0m\] ${__vcs_sub_dir} : '
+function parse_git_dirty {
+[[ $(git status 2> /dev/null | tail -n1) != "nothing to commit (working directory clean)" ]] && echo "*"
+}
+function parse_git_branch {
+git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e "s/* \(.*\)/${D} on ${PINK}\1${GREEN}$(parse_git_dirty)/"
+}
+parse_svn_revision() {
+    local DIRTY REV=$(svn info 2>/dev/null | grep Revision | sed -e 's/Revision: //')
+    [ "$REV" ] || return
+    [ "$(svn st)" ] && DIRTY='*'
+    echo "${D} at ${PINK}r$REV${GREEN}$DIRTY"
+}
+
+hg_ps1() {
+    hg prompt "{${D} on ${PINK}{branch}}{${GREEN}{status}}" 2> /dev/null
+}
+
+#PS1='\A \[\033[1;37m\]${__vcs_base_dir}\[\033[0m\] \[\033[0;32m\]$__vcs_prefix\[\033[0m\] \[\033[0;33m\]$(parse_git_branch)\[\033[0m\] ${__vcs_sub_dir} : '
+PS1='\n${PINK}\u ${D}at ${ORANGE}\A ${D}in ${GREEN}\w$(hg_ps1)$(parse_git_branch)$(parse_svn_revision)${D}\n$ '
