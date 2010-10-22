@@ -1,0 +1,1 @@
+/Users/kennethlove/Code/gundo.vim/doc/gundo.txt

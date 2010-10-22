@@ -12,7 +12,7 @@ set columns=160
 set gfn=Anonymous\ Pro:h12
 
 "colorscheme birds_of_paradise
-colorscheme twilight
+colorscheme liquidcarbon
 
 "Invisible character colors
 highlight NonText guifg=#4a4a59
@@ -42,7 +42,7 @@ set guicursor+=n-v-c:blinkon0-Cursor
 " MACVIM SETTINGS
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 if has("gui_macvim")
-  set transp=0
+  set transp=5
   set formatoptions-=tc
   let macvim_hig_shift_movement = 1
 endif

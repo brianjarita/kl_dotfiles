@@ -70,7 +70,7 @@ set wildmenu
 set wildmode=list:longest,full
 set wildignore+=*.o,*~,.lo,*.pyc,*.bak,*.jpg,*.png,*.gif
 set whichwrap=b,s,h,l,<,>,~,[,] "everything wraps
-set undolevels=1000
+set undolevels=5000
 set autoindent
 set preserveindent
 set nosmartindent
@@ -90,6 +90,7 @@ set showbreak=…
 set encoding=utf-8 fileencodings=.
 set showfulltag
 set completeopt=longest,menuone
+set iskeyword+=_,-,.
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " FOLDS
@@ -366,6 +367,16 @@ if has("autocmd")
         autocmd BufWritePost * :silent !git wip save "WIP from vim" --editor -- "%"
     augroup END
 
+    " PHP
+    augroup php
+        autocmd!
+        autocmd FileType php let php_sql_query=1
+        autocmd FileType php let php_htmlInString=1
+        autocmd FileType php let php_noShortTags=1
+        autocmd FileType php let php_folding=1
+        autocmd FileType php set omnifunc=phpcomplete#CompletePHP
+    augroup END
+
     " USE GOOGLE'S JAVASCRIPT LINTER
     """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
     au BufNewFile,BufRead *.js set makeprg=gjslint\ %
@@ -373,7 +384,7 @@ if has("autocmd")
 
     " SAVE FILES WHEN VIM LOSES FOCUS
     """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-    au FocusLost *.htm*,*.js,*.css :wa
+    au FocusLost *.htm*,*.js,*.css,*.php :wa
 
 endif
 
@@ -523,6 +534,10 @@ nnoremap - :Explore<CR>
 " PLUGIN SETTINGS
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+" GUNDO
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+nnoremap <F4> :GundoToggle<CR>
+
 " SUPERTAB
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:SuperTabDefaultCompletionType = '<c-x><c-o>'
@@ -594,6 +609,7 @@ nmap <Leader>d :NERDTreeFind<CR>
 let g:NERDChristmasTree = 1
 let g:NERDTreeQuitOnOpen = 1
 let g:NERDTreeWinPos = 'right'
+let g:NERDTreeWinSize = 30
 let g:NERDTreeChDirMode = 2
 let g:NERDTreeShowHidden = 1
 let g:NERDTreeAutoCenter = 1
@@ -924,3 +940,5 @@ command! -nargs=* Tests call RunTests('', '')<CR>redraw<CR>call JumpToError()<CR
 command! -nargs=* FileTests call RunTestsForFile('--failfast')<CR>redraw<CR>call JumpToError()<CR>
 nnoremap <leader>ta :call FindDjangoManageFile()<cr>:call RunTests('', '')<cr>:redraw<cr>:call JumpToError()<cr>
 nnoremap <leader>TA :call FindDjangoManageFile()<cr>:call RunTestsForFile('--failfast')<cr>:redraw<cr>:call JumpToError()<cr>
+
+source /Users/kennethlove/.vim/sadness/ropevim/rope.vim
