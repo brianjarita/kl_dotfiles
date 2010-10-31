@@ -1,3 +1,12 @@
-[submodule ".vim/bundle/html5"]
-	path = .vim/bundle/html5
-	url = git://github.com/othree/html5.vim.git
+[submodule ".vim/bundle/delete-surround-html"]
+	path = .vim/bundle/delete-surround-html
+	url = http://github.com/mjbrownie/delete-surround-html.git
+[submodule ".vim/bundle/django-template-textobjects"]
+	path = .vim/bundle/django-template-textobjects
+	url = http://github.com/mjbrownie/django-template-textobjects.git
+[submodule ".vim/bundle/html-textobjects"]
+	path = .vim/bundle/html-textobjects
+	url = http://github.com/mjbrownie/html-textobjects.git
+[submodule ".vim/bundle/zencoding"]
+	path = .vim/bundle/zencoding
+	url = http://github.com/mattn/zencoding-vim.git

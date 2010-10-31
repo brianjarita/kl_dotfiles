@@ -534,6 +534,15 @@ nnoremap - :Explore<CR>
 " PLUGIN SETTINGS
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+" SEQUENCE
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+vmap <m-a> <plug>SequenceV_Increment
+vmap <m-x> <plug>SequenceV_Decrement
+nmap <m-a> <plug>SequenceN_Increment
+nmap <m-x> <plug>SequenceN_Decrement
+vmap <c-a> <plug>SequenceAdd
+vmap <c-x> <plug>SequenceSubtract
+
 " GUNDO
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 nnoremap <F4> :GundoToggle<CR>
@@ -941,4 +950,3 @@ command! -nargs=* FileTests call RunTestsForFile('--failfast')<CR>redraw<CR>call
 nnoremap <leader>ta :call FindDjangoManageFile()<cr>:call RunTests('', '')<cr>:redraw<cr>:call JumpToError()<cr>
 nnoremap <leader>TA :call FindDjangoManageFile()<cr>:call RunTestsForFile('--failfast')<cr>:redraw<cr>:call JumpToError()<cr>
 
-source /Users/kennethlove/.vim/sadness/ropevim/rope.vim

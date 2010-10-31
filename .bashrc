@@ -34,6 +34,7 @@ alias m="python manage.py migrate"
 alias pys="python manage.py runserver"
 alias pysp="python manage.py runserver_plus"
 alias create_app="touch __init__.py admin.py models.py tests.py views.py urls.py"
+alias git=hub
 
 export HISTIGNORE=""
 export HISTSIZE=1048576
@@ -43,7 +44,7 @@ export CLICOLOR="yes"
 export FIGNORE="DS_Store"
 export LANG="en_US.UTF-8"
 
-export PATH="/Library/Frameworks/Python.framework/Versions/2.6/bin:/usr/texbin:/usr/local/bin:/usr/local/sbin:/usr/local/mysql/bin:/usr/local/pgsql/bin:/Users/kennethlove/.gem/ruby/1.8/bin:$PATH"
+export PATH="/Library/Frameworks/Python.framework/Versions/2.6/bin:/usr/texbin:/usr/local/bin:/usr/local/sbin:/usr/local/mysql/bin:/usr/local/pgsql/bin:/Users/kennethlove/.gem/ruby/1.8/bin:/Users/kennethlove/Developer/sbin:$PATH"
 export PYTHONPATH="/Library/Python/2.6:/Sites:/usr/local/bin:/usr/local/lib:$PYTHONPATH"
 export GDFONTPATH="/Users/kennethlove/Library/Fonts:/Library/Fonts:/System/Library/Fonts"
 export WORKON_HOME=$HOME/.virtualenvs
