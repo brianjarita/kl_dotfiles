@@ -10,3 +10,6 @@
 [submodule ".vim/bundle/zencoding"]
 	path = .vim/bundle/zencoding
 	url = http://github.com/mattn/zencoding-vim.git
+[submodule ".vim/bundle/vimango"]
+	path = .vim/bundle/vimango
+	url = https://github.com/tuxcanfly/ViMango.git
