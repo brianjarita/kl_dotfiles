@@ -950,3 +950,11 @@ command! -nargs=* FileTests call RunTestsForFile('--failfast')<CR>redraw<CR>call
 nnoremap <leader>ta :call FindDjangoManageFile()<cr>:call RunTests('', '')<cr>:redraw<cr>:call JumpToError()<cr>
 nnoremap <leader>TA :call FindDjangoManageFile()<cr>:call RunTestsForFile('--failfast')<cr>:redraw<cr>:call JumpToError()<cr>
 
+function! Todos()
+    bel sp ~/Dropbox/Winners/Tasks/todo/shared.todo
+    set ft=todo
+    resize 10
+endfunction
+nnoremap <leader>todo :call Todos()<CR>
+
+

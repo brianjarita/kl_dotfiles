@@ -19,7 +19,7 @@ alias l="ls"
 alias lg="ls -R | grep ":$" | sed -e 's/:$//' -e 's/[^-][^\/]*\//-/g' -e 's/^/ /' -e 's/-/|/'"
 alias sites="cd /Sites"
 alias top='top -ocpu'
-alias todo='/Users/kennethlove/src/pyThings/pyThings'
+alias t='todo.sh -d ~/.todo.cfg'
 
 # Start and Stop Servers
 alias start_mysql="sudo launchctl load -w /Library/LaunchDaemons/com.mysql.mysqld.plist"
