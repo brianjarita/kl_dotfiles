@@ -90,7 +90,6 @@ set showbreak=…
 set encoding=utf-8 fileencodings=.
 set showfulltag
 set completeopt=longest,menuone
-set iskeyword+=_,-,.
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " FOLDS
@@ -314,6 +313,9 @@ if has("autocmd")
     " Treat .rss files as XML
     autocmd BufNewFile,BufRead *.rss setfiletype xml
 
+    " Autodetect todo files
+    autocmd BufNewFile,BufRead *.todo setfiletype todo
+
     " Automatically strip extraneous whitespace when saving Python or
     " Javascript files.
     autocmd BufWritePre *.py,*.js :call <SID>StripTrailingWhitespaces()
@@ -343,7 +345,6 @@ if has("autocmd")
 
     autocmd BufRead *.html set filetype=htmldjango
     autocmd BufRead *.py set smartindent cinwords=if,else,elif,for,while,try,except,finally,def,class
-    autocmd BufRead *.py set iskeyword+=.
 
     " mapping to mark HTML5 files
     autocmd BufEnter *html nmap <F7> :setfiletype html5<CR>
@@ -358,7 +359,6 @@ if has("autocmd")
     au BufNewFile,BufRead *css,*xml,*htm* set foldmethod=indent
 
     " CSS and Sass files should see - as part of a keyword
-    autocmd FileType css,sass set iskeyword +=-
     au! BufRead,BufNewFile *.sass,*.scss setfiletype sass
 
     " Git WIP
@@ -392,6 +392,58 @@ endif
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " KEY MAPPINGS
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Shortcut for square brackets "
+onoremap id i[
+onoremap ad a[
+
+" Next ()
+vnoremap <silent> inb :<C-U>normal! f(vib<cr>
+onoremap <silent> inb :<C-U>normal! f(vib<cr>
+vnoremap <silent> anb :<C-U>normal! f(vab<cr>
+onoremap <silent> anb :<C-U>normal! f(vab<cr>
+vnoremap <silent> in( :<C-U>normal! f(vi(<cr>
+onoremap <silent> in( :<C-U>normal! f(vi(<cr>
+vnoremap <silent> an( :<C-U>normal! f(va(<cr>
+onoremap <silent> an( :<C-U>normal! f(va(<cr>
+
+" Next {}
+vnoremap <silent> inB :<C-U>normal! f{viB<cr>
+onoremap <silent> inB :<C-U>normal! f{viB<cr>
+vnoremap <silent> anB :<C-U>normal! f{vaB<cr>
+onoremap <silent> anB :<C-U>normal! f{vaB<cr>
+vnoremap <silent> in{ :<C-U>normal! f{vi{<cr>
+onoremap <silent> in{ :<C-U>normal! f{vi{<cr>
+vnoremap <silent> an{ :<C-U>normal! f{va{<cr>
+onoremap <silent> an{ :<C-U>normal! f{va{<cr>
+
+" Next []
+vnoremap <silent> ind :<C-U>normal! f[vi[<cr>
+onoremap <silent> ind :<C-U>normal! f[vi[<cr>
+vnoremap <silent> and :<C-U>normal! f[va[<cr>
+onoremap <silent> and :<C-U>normal! f[va[<cr>
+vnoremap <silent> in[ :<C-U>normal! f[vi[<cr>
+onoremap <silent> in[ :<C-U>normal! f[vi[<cr>
+vnoremap <silent> an[ :<C-U>normal! f[va[<cr>
+onoremap <silent> an[ :<C-U>normal! f[va[<cr>
+
+" Next <>
+vnoremap <silent> in< :<C-U>normal! f<vi<<cr>
+onoremap <silent> in< :<C-U>normal! f<vi<<cr>
+vnoremap <silent> an< :<C-U>normal! f<va<<cr>
+onoremap <silent> an< :<C-U>normal! f<va<<cr>
+
+" Next ''
+vnoremap <silent> in' :<C-U>normal! f'vi'<cr>
+onoremap <silent> in' :<C-U>normal! f'vi'<cr>
+vnoremap <silent> an' :<C-U>normal! f'va'<cr>
+onoremap <silent> an' :<C-U>normal! f'va'<cr>
+
+" Next ""
+vnoremap <silent> in" :<C-U>normal! f"vi"<cr>
+onoremap <silent> in" :<C-U>normal! f"vi"<cr>
+vnoremap <silent> an" :<C-U>normal! f"va"<cr>
+onoremap <silent> an" :<C-U>normal! f"va"<cr>
+
 " Omnicompletion keymappings
 inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 inoremap <expr> <C-n> pumvisible() ? '<C-n>' : '<C-n><C-r>=pumvisible() ? "\<Down>" : ""<CR>'
