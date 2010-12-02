@@ -6,4 +6,4 @@ function! g:ToggleNuMode()
 	endif
 endfunc
 
-nnoremap <C-L> :call g:ToggleNuMode()<cr>
+nnoremap <C-L> :call g:ToggleNuMode()<CR>
