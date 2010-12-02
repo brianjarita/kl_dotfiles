@@ -1,0 +1,6 @@
+:TCommand	tcommand.txt	/*:TCommand*
+g:tcommand#favourites	tcommand.txt	/*g:tcommand#favourites*
+g:tcommand#hide_rx	tcommand.txt	/*g:tcommand#hide_rx*
+g:tcommand#what	tcommand.txt	/*g:tcommand#what*
+tcommand#Select()	tcommand.txt	/*tcommand#Select()*
+tcommand.txt	tcommand.txt	/*tcommand.txt*
