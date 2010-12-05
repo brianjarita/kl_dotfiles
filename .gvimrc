@@ -12,7 +12,8 @@ set columns=160
 set gfn=Anonymous\ Pro:h12
 
 "colorscheme birds_of_paradise
-colorscheme autumn
+"colorscheme autumn
+colorscheme moria
 
 "Invisible character colors
 highlight NonText guifg=#4a4a59
