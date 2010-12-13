@@ -44,7 +44,7 @@ export CLICOLOR="yes"
 export FIGNORE="DS_Store"
 export LANG="en_US.UTF-8"
 
-export PATH="/Library/Frameworks/Python.framework/Versions/2.6/bin:/usr/texbin:/usr/local/bin:/usr/local/sbin:/usr/local/mysql/bin:/usr/local/pgsql/bin:/Users/kennethlove/.gem/ruby/1.8/bin:/Users/kennethlove/Developer/sbin:$PATH"
+export PATH="/Users/kennethlove/Developer/Cellar/ruby/1.9.2-p0/bin:/Library/Frameworks/Python.framework/Versions/2.6/bin:/usr/texbin:/usr/local/bin:/usr/local/sbin:/usr/local/mysql/bin:/usr/local/pgsql/bin:/Users/kennethlove/Developer/sbin:/Users/kennethlove/.gem/ruby/1.8/bin:$PATH"
 export PYTHONPATH="/Library/Python/2.6:/Sites:/usr/local/bin:/usr/local/lib:$PYTHONPATH"
 export GDFONTPATH="/Users/kennethlove/Library/Fonts:/Library/Fonts:/System/Library/Fonts"
 export WORKON_HOME=$HOME/.virtualenvs

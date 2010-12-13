@@ -100,6 +100,7 @@ set foldenable
 set foldopen=block,hor,mark,percent,quickfix,tag
 set foldminlines=2
 set fillchars+=fold:\
+set foldcolumn=2
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " BUFFERS
@@ -556,7 +557,7 @@ nmap <leader>ll :ll<CR>
 nmap gz :bdelete<CR>
 nmap gb :bnext<CR>
 nmap gB :bprev<CR>
-nmap <leader>clear :1,3000bd<CR>
+nmap <leader>reset :0,3000bd<CR>
 
 " Sort CSS files alphabetically
 nmap sort :g#\({\n\)\@<=#.,/}/sort<CR>
@@ -585,6 +586,10 @@ nnoremap - :Explore<CR>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " PLUGIN SETTINGS
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" VIMWIKI
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+map <leader>tt <Plug>VimwikiToggleListItem
 
 " TOGGLE RELATIVE
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -779,6 +784,7 @@ let g:miniBufExplMapWindowNavVim = 1
 let g:miniBufExplMapWindowNavArrows = 1
 let g:miniBufExplMapCTabSwitchBufs = 1
 let g:miniBufExplModSelTarget = 1
+let g:miniBufExplMaxSize = 0
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " FUNCTIONS
