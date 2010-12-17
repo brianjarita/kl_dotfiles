@@ -7,7 +7,7 @@ call pathogen#runtime_append_all_bundles()
 
 set nocompatible
 set cpoptions=aABceFsmq
-set autochdir
+"set autochdir
 set nostartofline " don't jump to the first character when paging
 set title
 set backspace=indent,eol,start " allow backspacing over everything in insert mode
@@ -362,12 +362,6 @@ if has("autocmd")
     " CSS and Sass files should see - as part of a keyword
     au! BufRead,BufNewFile *.sass,*.scss setfiletype sass
 
-    " Git WIP
-    augroup git-wip
-        autocmd!
-        autocmd BufWritePost * :silent !git wip save "WIP from vim" --editor -- "%"
-    augroup END
-
     " PHP
     augroup php
         autocmd!
@@ -590,6 +584,7 @@ nnoremap - :Explore<CR>
 " VIMWIKI
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 map <leader>tt <Plug>VimwikiToggleListItem
+let g:vimwiki_list= [{'path': '~/Dropbox/PlainText/vimwiki/', 'path_html': '~/Dropbox/Public/vimwiki/', 'ext': '.txt'}]
 
 " TOGGLE RELATIVE
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
