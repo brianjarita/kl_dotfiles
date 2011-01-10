@@ -749,6 +749,10 @@ let g:syntastic_quiet_warnings = 0
 " ignore djangohtml
 let g:syntastic_disabled_filetypes = ['htmldjango', 'txt', 'text', 'tumblr', 'css', 'html5']
 
+" ARGUMENT REWRAP
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+nnoremap <silent> <leader>ar :call argumentrewrap#RewrapArguments()<CR>
+
 " FUGITIVE
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 nmap <Leader>gs :Gstatus<CR>

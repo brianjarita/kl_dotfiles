@@ -19,3 +19,18 @@
 [submodule ".vim/bundle/lusty"]
 	path = .vim/bundle/lusty
 	url = https://github.com/sjbach/lusty.git
+[submodule ".vim/bundle/vim-unimpaired"]
+	path = .vim/bundle/vim-unimpaired
+	url = https://github.com/tpope/vim-unimpaired.git
+[submodule ".vim/bundle/argumentrewrap"]
+	path = .vim/bundle/argumentrewrap
+	url = https://github.com/jakobwesthoff/argumentrewrap.git
+[submodule ".vim/bundle/vim-markdown-preview"]
+	path = .vim/bundle/vim-markdown-preview
+	url = https://github.com/robgleeson/vim-markdown-preview.git
+[submodule ".vim/bundle/minibufexpl"]
+	path = .vim/bundle/minibufexpl
+	url = https://github.com/fholgado/minibufexpl.vim.git
+[submodule ".vim/bundle/searchfold"]
+	path = .vim/bundle/searchfold
+	url = https://github.com/vim-scripts/searchfold.vim.git

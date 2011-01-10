@@ -1,0 +1,15 @@
+#!/bin/sh
+
+# thanks to http://www.reddit.com/r/linux/comments/cvlle/post_your_bashrc_file/c0vn930
+
+if [ -z $TMUX ]; then
+	tmux new -d -s all
+	if [ 0 -eq $? ]; then
+		tmux set -t all status on
+		tmux -q new \; linkw -t all \; kill-window -t all:0
+	else
+		tmux -q new \; linkw -t all
+	fi
+	tmux attach -t all
+fi
+

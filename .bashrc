@@ -26,7 +26,8 @@ alias start_mysql="sudo launchctl load -w /Library/LaunchDaemons/com.mysql.mysql
 alias stop_mysql="sudo launchctl unload -w /Library/LaunchDaemons/com.mysql.mysqld.plist"
 alias start_postgres="/usr/local/pgsql/bin/pg_ctl -D /usr/local/pgsql/data -l logfile start"
 alias stop_postgres="/usr/local/pgsql/bin/pg_ctl -D /usr/local/pgsql/data -l logfile stop"
-
+alias start_redis="redis-server /Users/kennethlove/Developer/etc/redis.conf"
+#
 # Python/Django
 alias pm="python manage.py"
 alias sm="python manage.py schemamigration"
@@ -44,8 +45,9 @@ export CLICOLOR="yes"
 export FIGNORE="DS_Store"
 export LANG="en_US.UTF-8"
 
-export PATH="/Users/kennethlove/Developer/Cellar/ruby/1.9.2-p0/bin:/Library/Frameworks/Python.framework/Versions/2.6/bin:/usr/texbin:/usr/local/bin:/usr/local/sbin:/usr/local/mysql/bin:/usr/local/pgsql/bin:/Users/kennethlove/Developer/sbin:/Users/kennethlove/.gem/ruby/1.8/bin:$PATH"
+export PATH="/Users/kennethlove/Developer/Cellar/ruby/1.9.2-p0/bin:/Users/kennethlove/Developer/share/npm/bin:/Library/Frameworks/Python.framework/Versions/2.6/bin:/usr/texbin:/usr/local/bin:/usr/local/sbin:/usr/local/mysql/bin:/usr/local/pgsql/bin:/Users/kennethlove/Developer/sbin:/Users/kennethlove/.gem/ruby/1.8/bin:$PATH"
 export PYTHONPATH="/Library/Python/2.6:/Sites:/usr/local/bin:/usr/local/lib:$PYTHONPATH"
+export NODE_PATH="/Users/kennethlove/Developer/lib/node:$NODE_PATH"
 export GDFONTPATH="/Users/kennethlove/Library/Fonts:/Library/Fonts:/System/Library/Fonts"
 export WORKON_HOME=$HOME/.virtualenvs
 export PIP_VIRTUALENV_BASE=$WORKON_HOME
