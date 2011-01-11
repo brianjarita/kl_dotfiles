@@ -13,7 +13,8 @@ set gfn=Anonymous\ Pro:h12
 
 "colorscheme birds_of_paradise
 "colorscheme autumn
-colorscheme moria
+colorscheme earendel
+set background=light
 
 "Invisible character colors
 highlight NonText guifg=#4a4a59
