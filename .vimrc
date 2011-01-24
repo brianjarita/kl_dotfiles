@@ -310,12 +310,16 @@ if has("autocmd")
     autocmd FileType css setlocal ts=2 sts=2 sw=2 expandtab
     autocmd FileType javascript setlocal ts=4 sts=4 sw=4 expandtab
     autocmd FileType python setlocal ts=4 sts=4 sw=4 expandtab nocindent
+    autocmd FileType python setlocal ts=4 sts=4 sw=4 expandtab
 
     " Treat .rss files as XML
     autocmd BufNewFile,BufRead *.rss setfiletype xml
 
     " Autodetect todo files
     autocmd BufNewFile,BufRead *.todo setfiletype todo
+
+    " Autodetect Actionscript files
+    au BufNewFile,BufRead *.as set filetype=actionscript
 
     " Automatically strip extraneous whitespace when saving Python or
     " Javascript files.
@@ -354,6 +358,10 @@ if has("autocmd")
         autocmd FileType python set omnifunc=pythoncomplete#Complete
         autocmd FileType css,sass set omnifunc=csscomplete#CompleteCSS
         autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
+        autocmd FileType ruby,eruby set omnifunc=rubycomplete#Complete
+        autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
+        autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
+        autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
     endif
 
     " CSS, XML, and HTML file shoulds be folded based on indent
