@@ -107,9 +107,16 @@ snippet body
 	<body>
 		${1}
 	</body>
-snippet head
+snippet head old
 	<head>
 		<meta http-equiv="content-type" content="text/html; charset=utf-8"`Close()`>
+
+		<title>${1:`substitute(Filename('', 'Page Title'), '^.', '\u&', '')`}</title>
+		${2}
+	</head>
+snippet head new
+	<head>
+		<meta charset="utf-8"`Close()`>
 
 		<title>${1:`substitute(Filename('', 'Page Title'), '^.', '\u&', '')`}</title>
 		${2}

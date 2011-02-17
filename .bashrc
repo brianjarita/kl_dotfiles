@@ -27,13 +27,16 @@ alias stop_mysql="sudo launchctl unload -w /Library/LaunchDaemons/com.mysql.mysq
 alias start_postgres="/usr/local/pgsql/bin/pg_ctl -D /usr/local/pgsql/data -l logfile start"
 alias stop_postgres="/usr/local/pgsql/bin/pg_ctl -D /usr/local/pgsql/data -l logfile stop"
 alias start_redis="redis-server /Users/kennethlove/Developer/etc/redis.conf"
+alias start_mongo="mongod run --config /Users/kennethlove/Developer/Cellar/mongodb/1.6.5-x86_64/mongod.conf"
 #
 # Python/Django
 alias pm="python manage.py"
 alias sm="python manage.py schemamigration"
 alias m="python manage.py migrate"
-alias pys="python manage.py runserver"
-alias pysp="python manage.py runserver_plus"
+alias pmr="python manage.py runserver"
+alias pms="python manage.py shell"
+alias pmrp="python manage.py runserver_plus"
+alias pmsp="python manage.py shell_plus"
 alias create_app="touch __init__.py admin.py models.py tests.py views.py urls.py"
 alias git=hub
 
@@ -77,6 +80,7 @@ shopt -s dotglob
 
 set -o noclobber
 set -o ignoreeof
+set -o vi
 
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(lesspipe)"

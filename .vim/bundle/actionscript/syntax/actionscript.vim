@@ -2,10 +2,11 @@
 " Language:	actionScript
 " Maintainer:	Igor Dvorsky <amigo@modesite.net>
 " URL:		http://www.modesite.net/vim/actionscript.vim
-" Last Change:	2002 Sep 12
+" Last Change:	2010 Oct 12
 " Updated to support AS 2.0 2004 March 12 by Richard Leider  (richard@appliedrhetoric.com)
 " Updated to support new AS 2.0 Flash 8 Language Elements 2005 September 29 (richard@appliedrhetoric.com)
 " Updated to support AS 3.0 Language Elements 2009 March 03 (richard@appliedrhetoric.com)
+" Updated to include rudimentary regexp support 2010 October 12 (celtic@sairyx.org)
 
 
 " For version 5.x: Clear all syntax items
@@ -32,6 +33,7 @@ syn region  actionScriptStringD				start=+"+  skip=+\\\\\|\\"+  end=+"+  contain
 syn region  actionScriptStringS				start=+'+  skip=+\\\\\|\\'+  end=+'+  contains=actionScriptSpecial,@htmlPreproc
 syn match   actionScriptSpecialCharacter		"'\\.'"
 syn match   actionScriptNumber				"-\=\<\d\+L\=\>\|0[xX][0-9a-fA-F]\+\>"
+syn region  actionScriptRegexpString     		start=+/[^/*]+me=e-1 skip=+\\\\\|\\/+ end=+/[gi]\{0,2\}\s*$+ end=+/[gi]\{0,2\}\s*[;.,)\]}]+me=e-1 contains=@htmlPreproc oneline
 syn keyword actionScriptConditional			if else and or not
 syn keyword actionScriptRepeat				do while for in
 syn keyword actionScriptCase				break continue switch case default
@@ -108,6 +110,7 @@ if version >= 508 || !exists("did_actionscript_syn_inits")
   HiLink actionScriptSpecial		Special
   HiLink actionScriptStringS		String
   HiLink actionScriptStringD		String
+  HiLink actionScriptRegexpString	String
   HiLink actionScriptCharacter		Character
   HiLink actionScriptSpecialCharacter	actionScriptSpecial
   HiLink actionScriptNumber		actionScriptValue

@@ -2,8 +2,8 @@
 " PATHOGEN
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 filetype off
-call pathogen#helptags()
 call pathogen#runtime_append_all_bundles()
+call pathogen#helptags()
 
 set nocompatible
 set cpoptions=aABceFsmq
@@ -144,7 +144,7 @@ let g:SimpleJsIndenter_BriefMode = 1
 set laststatus=2
 
 set statusline=%-.50F " Full path to file, 50 characters max
-set statusline+=\ %{fugitive#statusline()} " Fugitive status line
+"set statusline+=\ %{fugitive#statusline()} " Fugitive status line
 set statusline+=\ (%n) " buffer number
 set statusline+=\ %([%M%R%H%W]\ %) " Modified, Read-only, Help, and Preview flags
 set statusline+=\ %y " Filetype
@@ -295,8 +295,7 @@ cno $q <C-\>eDeleteTilSlash()<CR>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " SETTINGS PER FILETYPE
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-filetype plugin on
-filetype indent on
+filetype plugin indent on
 if has("autocmd")
     " Syntax of these languages is fussy over tabs Vs spaces
     autocmd FileType make setlocal ts=8 sts=8 sw=8 noexpandtab
@@ -365,7 +364,7 @@ if has("autocmd")
     endif
 
     " CSS, XML, and HTML file shoulds be folded based on indent
-    au BufNewFile,BufRead *css,*xml,*htm* set foldmethod=indent
+    au BufNewFile,BufRead *css,*xml,*htm*,*as set foldmethod=indent
 
     " CSS and Sass files should see - as part of a keyword
     au! BufRead,BufNewFile *.sass,*.scss setfiletype sass
@@ -564,9 +563,6 @@ nmap <leader>reset :0,3000bd<CR>
 " Sort CSS files alphabetically
 nmap sort :g#\({\n\)\@<=#.,/}/sort<CR>
 
-" Rainbows!
-nmap <leader>r :RainbowParenthesesToggle<CR>
-
 " Make <leader>ft fold an HTML tag
 nnoremap <leader>ft Vatzf
 
@@ -584,6 +580,10 @@ nnoremap <leader>a :Ack
 
 " Use - to open Explore
 nnoremap - :Explore<CR>
+
+" Cmd-/ for comment toggle.
+nnoremap <D-/> :TComment<CR>
+vnoremap <D-/> :TComment<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " PLUGIN SETTINGS
@@ -674,12 +674,6 @@ inoremap <M-o> <Esc>o
 inoremap <C-j> <Down>
 let g:ragtag_global_maps = 1
 
-" NERD_COMMENTER
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-nmap <D-/> ,c<space>
-vmap <D-/> ,c<space>
-imap <D-/> <C-O>,c<space>
-
 " NERD_TREE
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 nmap <Leader>d :NERDTreeFind<CR>
@@ -761,11 +755,6 @@ let g:syntastic_disabled_filetypes = ['htmldjango', 'txt', 'text', 'tumblr', 'cs
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 nnoremap <silent> <leader>ar :call argumentrewrap#RewrapArguments()<CR>
 
-" FUGITIVE
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-nmap <Leader>gs :Gstatus<CR>
-nmap <Leader>gc :Gcommit<CR>
-
 " SCRATCH BUFFER
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 function! s:ToggleScratch()
@@ -785,28 +774,9 @@ let g:bufExplorerSplitRight = 1
 let g:bufExplorerDefaultHelp = 0
 let g:bufExplorerShowRelativePath = 1
 
-" MINIBUFEXPL
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:miniBufExplMapWindowNavVim = 1
-let g:miniBufExplMapWindowNavArrows = 1
-let g:miniBufExplMapCTabSwitchBufs = 1
-let g:miniBufExplModSelTarget = 1
-let g:miniBufExplMaxSize = 0
-
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " FUNCTIONS
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-" TOGGLE LINE NUMBER MODE
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-function! g:ToggleNuMode()
-    if (&rnu == 1)
-        set nu
-    else
-        set rnu
-    endif
-endfunc
-nnoremap <leader>l :call g:ToggleNuMode()<CR>
 
 " HIGHLIGHT LONG LINES
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
