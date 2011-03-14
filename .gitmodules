@@ -46,3 +46,9 @@
 [submodule ".vim/bundle/jshint"]
 	path = .vim/bundle/jshint
 	url = https://github.com/wookiehangover/jshint.vim.git
+[submodule ".vim/bundle/extradite"]
+	path = .vim/bundle/extradite
+	url = https://github.com/int3/vim-extradite.git
+[submodule ".vim/bundle/chapa"]
+	path = .vim/bundle/chapa
+	url = https://github.com/alfredodeza/chapa.vim.git

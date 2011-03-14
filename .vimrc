@@ -144,14 +144,15 @@ let g:SimpleJsIndenter_BriefMode = 1
 set laststatus=2
 
 set statusline=%-.50F " Full path to file, 50 characters max
-"set statusline+=\ %{fugitive#statusline()} " Fugitive status line
+set statusline+=\ %{fugitive#statusline()} " Fugitive status line
 set statusline+=\ (%n) " buffer number
 set statusline+=\ %([%M%R%H%W]\ %) " Modified, Read-only, Help, and Preview flags
 set statusline+=\ %y " Filetype
 set statusline+=\ %#error# " switch to error color
 set statusline+=%{StatuslineTabWarning()} " show warning about mixed tabs or bad &et
 set statusline+=%{StatuslineTrailingSpaceWarning()} " show warning about trailing whitespace
-set statusline+=%{StatuslineLongLineWarning()} " show warning about long lines
+"set statusline+=%{StatuslineLongLineWarning()} " show warning about long 
+"lines
 set statusline+=%* " back to normal color
 set statusline+=\ %#warningmsg# " switch to warningmsg color
 set statusline+=%{SyntasticStatuslineFlag()} " show Syntastic flag
