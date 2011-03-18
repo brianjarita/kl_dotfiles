@@ -52,3 +52,6 @@
 [submodule ".vim/bundle/chapa"]
 	path = .vim/bundle/chapa
 	url = https://github.com/alfredodeza/chapa.vim.git
+[submodule ".vim/bundle/taglist-plus"]
+	path = .vim/bundle/taglist-plus
+	url = https://github.com/int3/vim-taglist-plus.git
