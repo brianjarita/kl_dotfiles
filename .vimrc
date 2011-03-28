@@ -670,6 +670,7 @@ let Tlist_GainFocus_On_ToggleOpen = 1
 let Tlist_Close_On_Select = 1
 let Tlist_Auto_Update = 1
 let Tlist_Show_One_File = 1
+let g:tlist_javascript_settings = 'js;javascript;s:string;a:array;o:object;f:function'
 
 nnoremap <silent> <Leader>T :TlistToggle<CR>
 
