@@ -73,6 +73,7 @@ PINK=$'\033[0;31m'
 GREEN=$'\033[0;32m'
 # ORANGE=$'\033[33;40m'
 ORANGE=$'\033[0;33m'
+NOTHING=$'\033[0m'
 
 function parse_git_dirty {
 [[ $(git status 2> /dev/null | tail -n1) != "nothing to commit (working directory clean)" ]] && echo "*"
@@ -92,4 +93,4 @@ hg_ps1() {
 }
 
 #PS1='\A \[\033[1;37m\]${__vcs_base_dir}\[\033[0m\] \[\033[0;32m\]$__vcs_prefix\[\033[0m\] \[\033[0;33m\]$(parse_git_branch)\[\033[0m\] ${__vcs_sub_dir} : '
-PS1='\n${PINK}\u ${D}at ${ORANGE}\A ${D}in ${GREEN}\w$(hg_ps1)$(parse_git_branch)$(parse_svn_revision)${D}\n$ '
+PS1='\n${PINK}\u ${D}at ${ORANGE}\A ${D}in ${GREEN}\w$(hg_ps1)$(parse_git_branch)$(parse_svn_revision)${D}\n$ ${NOTHING}'
