@@ -13,13 +13,16 @@ set gfn=Anonymous\ Pro:h12
 
 "colorscheme birds_of_paradise
 "colorscheme autumn
-" colorscheme earendel
-set background=dark
-colorscheme solarized
+colorscheme earendel
+set background=light
 
 "Invisible character colors
 highlight NonText guifg=#4a4a59
 highlight SpecialKey guifg=#4a4a59
+
+" Colors for EasyMotion
+hi EasyMotionTarget guibg=NONE guifg=#ff0000 gui=bold ctermbg=NONE ctermfg=196 cterm=bold
+hi EasyMotionShade guibg=NONE guifg=#585858 gui=NONE ctermbg=NONE ctermfg=240 cterm=bold
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " GUI SETTINGS
