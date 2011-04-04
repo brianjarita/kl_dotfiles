@@ -48,7 +48,7 @@ export CLICOLOR="yes"
 export FIGNORE="DS_Store"
 export LANG="en_US.UTF-8"
 
-export PATH="/Users/kennethlove/Developer/Cellar/ruby/1.9.2-p0/bin:/Users/kennethlove/Developer/share/npm/bin:/Library/Frameworks/Python.framework/Versions/2.6/bin:/usr/texbin:/usr/local/bin:/usr/local/sbin:/usr/local/mysql/bin:/usr/local/pgsql/bin:/Users/kennethlove/Developer/sbin:/Users/kennethlove/.gem/ruby/1.8/bin:/Users/kennethlove/Developer/bin/flex/bin:$PATH"
+export PATH="/Users/kennethlove/Developer/Cellar/ruby/1.9.2-p0/bin:/Users/kennethlove//Developer/Cellar/ruby/1.9.2-p180/bin/:/Users/kennethlove/Developer/share/npm/bin:/Library/Frameworks/Python.framework/Versions/2.6/bin:/usr/texbin:/usr/local/bin:/usr/local/sbin:/usr/local/mysql/bin:/usr/local/pgsql/bin:/Users/kennethlove/Developer/sbin:/Users/kennethlove/.gem/ruby/1.8/bin:/Users/kennethlove/Developer/bin/flex/bin:$PATH"
 export PYTHONPATH="/Library/Python/2.6:/Sites:/usr/local/bin:/usr/local/lib:$PYTHONPATH"
 export NODE_PATH="/Users/kennethlove/Developer/lib/node:$NODE_PATH"
 export GDFONTPATH="/Users/kennethlove/Library/Fonts:/Library/Fonts:/System/Library/Fonts"
