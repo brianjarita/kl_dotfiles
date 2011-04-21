@@ -11,10 +11,9 @@ set columns=160
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set gfn=Anonymous\ Pro:h12
 
-"colorscheme birds_of_paradise
-"colorscheme autumn
 colorscheme earendel
 set background=light
+colorscheme solarized
 
 "Invisible character colors
 highlight NonText guifg=#4a4a59

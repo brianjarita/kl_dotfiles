@@ -145,6 +145,7 @@ set laststatus=2
 
 set statusline=%-.50F " Full path to file, 50 characters max
 set statusline+=\ %{fugitive#statusline()} " Fugitive status line
+set statusline+=\ %{g:HgStatusForFile()} " Thermometer status line
 set statusline+=\ (%n) " buffer number
 set statusline+=\ %([%M%R%H%W]\ %) " Modified, Read-only, Help, and Preview flags
 set statusline+=\ %y " Filetype
