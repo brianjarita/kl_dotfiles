@@ -27,7 +27,7 @@ alias stop_mysql="sudo launchctl unload -w /Library/LaunchDaemons/com.mysql.mysq
 alias start_postgres="/usr/local/pgsql/bin/pg_ctl -D /usr/local/pgsql/data -l logfile start"
 alias stop_postgres="/usr/local/pgsql/bin/pg_ctl -D /usr/local/pgsql/data -l logfile stop"
 alias start_redis="redis-server /Users/kennethlove/Developer/etc/redis.conf"
-alias start_mongo="mongod run --config /Users/kennethlove/Developer/Cellar/mongodb/1.6.5-x86_64/mongod.conf"
+alias start_mong="mongod run --config /usr/local/Cellar/mongodb/1.8.1-x86_64/mongod.conf"
 #
 # Python/Django
 alias pm="python manage.py"
@@ -38,7 +38,7 @@ alias pms="python manage.py shell"
 alias pmrp="python manage.py runserver_plus"
 alias pmsp="python manage.py shell_plus"
 alias create_app="touch __init__.py admin.py models.py tests.py views.py urls.py"
-alias git=hub
+#alias git=hub
 
 export HISTIGNORE=""
 export HISTSIZE=1048576
@@ -50,11 +50,12 @@ export LANG="en_US.UTF-8"
 
 export PATH="/Users/kennethlove/Developer/Cellar/ruby/1.9.2-p0/bin:/Users/kennethlove//Developer/Cellar/ruby/1.9.2-p180/bin/:/Users/kennethlove/Developer/share/npm/bin:/Library/Frameworks/Python.framework/Versions/2.6/bin:/usr/texbin:/usr/local/bin:/usr/local/sbin:/usr/local/mysql/bin:/usr/local/pgsql/bin:/Users/kennethlove/Developer/sbin:/Users/kennethlove/.gem/ruby/1.8/bin:/Users/kennethlove/Developer/bin/flex/bin:/Users/kennethlove/Developer/Cellar/geos/3.2.2/bin/:/Users/kennethlove/.cabal/bin:$PATH"
 export PYTHONPATH="/Library/Python/2.6:/Sites:/usr/local/bin:/usr/local/lib:$PYTHONPATH"
-export NODE_PATH="/Users/kennethlove/Developer/lib/node:$NODE_PATH"
+export NODE_PATH="/usr/local/lib/node:$NODE_PATH"
 export GDFONTPATH="/Users/kennethlove/Library/Fonts:/Library/Fonts:/System/Library/Fonts"
 export WORKON_HOME=$HOME/.virtualenvs
 export PIP_VIRTUALENV_BASE=$WORKON_HOME
 export PIP_RESPECT_VIRTUALENV=true
+export PROJECT_HOME=/Sites
 
 export CLICOLOR=1;
 LSCOLORS=cxfxcxdxbxegedabagacad;
@@ -94,25 +95,25 @@ fi
 if [ -f /etc/git-completion.bash ]; then
     . /etc/git-completion.bash
 fi
-#source /usr/local/bin/virtualenvwrapper_bashrc
-source /usr/local/bin/virtualenvwrapper.sh
+#source /usr/local/bin/virtualenvwrapper.sh
 if [ -f /usr/local/share/doc/task/scripts/bash/task_completion.sh ]; then
     . /usr/local/share/doc/task/scripts/bash/task_completion.sh
 fi
 #source ~/src/django-trunk/extras/django_bash_completion
+source /usr/local/bin/virtualenvwrapper.sh
 
 # Use MacVim's VIM instead of system VIM.
 # Start gVIM
 v() {
 if [ $# == 0 ]
 then
-    /Applications/MacVim.app/Contents/MacOS/Vim -g &
+    ~/Applications/MacVim.app/Contents/MacOS/Vim -g &
 else
     if [ "$1" == "-" ]
     then
-    /Applications/MacVim.app/Contents/MacOS/Vim -g -
+    ~/Applications/MacVim.app/Contents/MacOS/Vim -g -
     else
-    /Applications/MacVim.app/Contents/MacOS/Vim -g "$@" &
+    ~/Applications/MacVim.app/Contents/MacOS/Vim -g "$@" &
     fi
 fi
 }
@@ -121,13 +122,13 @@ fi
 vi() {
 if [ $# == 0 ]
 then
-    /Applications/MacVim.app/Contents/MacOS/Vim
+    ~/Applications/MacVim.app/Contents/MacOS/Vim
 else
     if [ "$1" == "-" ]
     then
-    /Applications/MacVim.app/Contents/MacOS/Vim -
+    ~/Applications/MacVim.app/Contents/MacOS/Vim -
     else
-    /Applications/MacVim.app/Contents/MacOS/Vim "$@"
+    ~/Applications/MacVim.app/Contents/MacOS/Vim "$@"
     fi
 fi
 }
@@ -136,13 +137,13 @@ fi
 vim() {
 if [ $# == 0 ]
 then
-    /Applications/MacVim.app/Contents/MacOS/Vim
+    ~/Applications/MacVim.app/Contents/MacOS/Vim
 else
     if [ "$1" == "-" ]
     then
-    /Applications/MacVim.app/Contents/MacOS/Vim -
+    ~/Applications/MacVim.app/Contents/MacOS/Vim -
     else
-    /Applications/MacVim.app/Contents/MacOS/Vim "$@"
+    ~/Applications/MacVim.app/Contents/MacOS/Vim "$@"
     fi
 fi
 }

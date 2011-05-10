@@ -89,7 +89,7 @@ set listchars=tab:▸\ ,eol:¬,trail:-
 set showbreak=…
 set encoding=utf-8 fileencodings=.
 set showfulltag
-set completeopt=longest,menuone
+set completeopt=longest,menuone,preview
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " FOLDS
@@ -134,6 +134,7 @@ autocmd BufWinLeave * call clearmatches()
 
 " full Python syntax highlighting
 let python_highlight_all=1
+let g:pyflakes_use_quickfix=0
 
 " use brief mode for Javascript indenter
 let g:SimpleJsIndenter_BriefMode = 1
@@ -306,7 +307,7 @@ if has("autocmd")
     " Customisations based on house-style (arbitrary)
     autocmd FileType html setlocal ts=4 sts=4 sw=4 noexpandtab
     autocmd FileType xhtml setlocal ts=4 sts=4 sw=4 noexpandtab
-    autocmd FileType html.django_template setlocal ts=4 sts=4 sw=4 noexpandtab
+    autocmd FileType htmldjango.html setlocal ts=4 sts=4 sw=4 noexpandtab
     autocmd FileType htmldjango setlocal ts=4 sts=4 sw=4 noexpandtab
     autocmd FileType css setlocal ts=2 sts=2 sw=2 expandtab
     autocmd FileType javascript setlocal ts=4 sts=4 sw=4 expandtab
@@ -349,7 +350,7 @@ if has("autocmd")
 
     autocmd BufEnter * :syntax sync fromstart
 
-    autocmd BufRead *.html set filetype=htmldjango
+    autocmd BufRead *.html set filetype=htmldjango.html
     autocmd BufRead *.py set smartindent cinwords=if,else,elif,for,while,try,except,finally,def,class
 
     " mapping to mark HTML5 files
@@ -369,7 +370,7 @@ if has("autocmd")
     au BufNewFile,BufRead *css,*xml,*htm*,*as set foldmethod=indent
 
     " CSS and Sass files should see - as part of a keyword
-    au! BufRead,BufNewFile *.sass,*.scss setfiletype sass
+    au! BufRead,BufNewFile *.sass,*.scss,*.less setfiletype sass
 
     " PHP
     augroup php
@@ -591,6 +592,27 @@ vnoremap <D-/> :TComment<CR>
 " PLUGIN SETTINGS
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+" DJANGO NOSE & PYTEST
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+map <leader>dt :set makeprg=python\ manage.py\ test\|:call MakeGreen()<CR>
+" Execute the tests
+nmap <silent><Leader>tf <Esc>:Pytest file<CR>
+nmap <silent><Leader>tc <Esc>:Pytest class<CR>
+nmap <silent><Leader>tm <Esc>:Pytest method<CR>
+" cycle through test errors
+nmap <silent><Leader>tn <Esc>:Pytest next<CR>
+nmap <silent><Leader>tp <Esc>:Pytest previous<CR>
+nmap <silent><Leader>te <Esc>:Pytest error<CR>
+
+" ROPEVIM
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+map <leader>j :RopeGotoDefinition<CR>
+map <leader>r :RopeRename<CR>
+
+" TASKLIST
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+nnoremap <leader>td <Plug>TaskList
+
 " EASYMOTION
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:EasyMotion_do_shade = 1
@@ -627,7 +649,7 @@ nnoremap <F4> :GundoToggle<CR>
 
 " SUPERTAB
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:SuperTabDefaultCompletionType = '<c-x><c-o>'
+let g:SuperTabDefaultCompletionType = 'context'
 let g:SuperTabMappingTabLiteral = '<a-tab>'
 
 " PYDICTION
@@ -1001,8 +1023,8 @@ endfunction
 
 command! -nargs=* Tests call RunTests('', '')<CR>redraw<CR>call JumpToError()<CR>
 command! -nargs=* FileTests call RunTestsForFile('--failfast')<CR>redraw<CR>call JumpToError()<CR>
-nnoremap <leader>ta :call FindDjangoManageFile()<cr>:call RunTests('', '')<cr>:redraw<cr>:call JumpToError()<cr>
-nnoremap <leader>TA :call FindDjangoManageFile()<cr>:call RunTestsForFile('--failfast')<cr>:redraw<cr>:call JumpToError()<cr>
+" nnoremap <leader>ta :call FindDjangoManageFile()<cr>:call RunTests('', '')<cr>:redraw<cr>:call JumpToError()<cr>
+" nnoremap <leader>TA :call FindDjangoManageFile()<cr>:call RunTestsForFile('--failfast')<cr>:redraw<cr>:call JumpToError()<cr>
 
 function! Todos()
     bel sp ~/Dropbox/Winners/Tasks/todo/shared.todo
@@ -1010,5 +1032,17 @@ function! Todos()
     resize 10
 endfunction
 nnoremap <leader>todo :call Todos()<CR>
+"
+" Add the virtualenv's site-packages to vim path
+py << EOF
+import os.pat
+import sys
+import vim
+if os.environ['VIRTUAL_ENV']:
+    project_base_dir = os.environ['VIRTUAL_ENV']
+    sys.path.insert(0, project_base_dir)
+    activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
+    execfile(activate_this, dict(__file__=activate_this))
+EOF
 
 
