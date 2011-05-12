@@ -152,6 +152,11 @@ function git_diff() {
     git_diff --no-ext-diff -w "$@" | vim -R -
 }
 
+function tabc() {
+NAME=$1; if [ -z "$NAME" ]; then NAME="Default"; fi
+osascript -e "tell application \"Terminal\" to set current settings of front window to settings set \"$NAME\""
+}
+
 complete -cf sudo
 
 source ~/.bash_vcs
