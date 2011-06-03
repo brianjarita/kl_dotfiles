@@ -11,9 +11,9 @@ set columns=160
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set gfn=Anonymous\ Pro:h12
 
-colorscheme earendel
 set background=light
-colorscheme solarized
+let g:lucius_style='light'
+colorscheme Lucius
 
 "Invisible character colors
 highlight NonText guifg=#4a4a59
