@@ -14,8 +14,8 @@ set backspace=indent,eol,start " allow backspacing over everything in insert mod
 set ttyfast
 let mapleader = ','
 let g:mapleader = ','
-let localleader = ','
-let g:localleader = ','
+let localleader = '\'
+let g:localleader = '\'
 let leader = ','
 let g:leader = ','
 
@@ -505,7 +505,7 @@ cmap w!! %!sudo tee > /dev/null %
 nmap Q gq
 
 " Turn hidden characters on/off
-nmap <silent> <localleader>s :set nolist!<CR>
+nmap <silent> <leader>s :set nolist!<CR>
 
 " Up/down go visually instead of by physical lines
 " Interactive ones need to check whether we're in the autocomplete popup
@@ -935,104 +935,6 @@ endfunc
 " This beauty remembers where you were the last time you edited the file, and returns to the same position.
 au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" TESTING
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:makeprg_django_app = 'python\ manage.py\ test'
-let g:makeprg_django_project = 'python\ manage.py\ test'
-set errorformat=%C\ %.%#,%A\ \ File\ \"%f\"\\,\ line\ %l%.%#,%Z%[%^\ ]%\\@=%m
-
-function! FindDjangoManageFile()
-   let expandstr = '%:p:h' " dirname
-   while expand(expandstr) != '/'
-       let testpath = expand(expandstr)
-       if len(getfperm(testpath . '/manage.py')) > 0
-           let g:makeprg_django_project = testpath . '/manage.py'
-           return
-       endif
-       let expandstr .= ':h'
-   endwhile
-endfunction
-
-
-function! RunTestsForFile(args)
-    if @% =~ '\.py$'
-        let expandstr = '%:p:h' " dirname
-        while expand(expandstr) != '/'
-            let testpath = expand(expandstr)
-            if len(getfperm(testpath . '/tests')) > 0 || len(getfperm(testpath . '/tests.py')) > 0
-                call RunTests(expand(expandstr . ':t'), a:args)
-                return
-            endif
-            let expandstr .= ':h'
-        endwhile
-    endif
-    call RunTests('', a:args)
-endfunction
-
-function! RunTests(target, args)
-    silent ! echo
-    silent ! echo -e "\033[1;36mRunning all unit tests\033[0m"
-    silent w
-    if len(a:target)
-        execute 'set makeprg=' . g:makeprg_django_app
-    else
-        execute 'set makeprg=' . g:makeprg_django_project
-    endif
-    exec "make! " . a:target . " " . a:args
-endfunction
-
-function! JumpToError()
-    let has_valid_error = 0
-    for error in getqflist()
-        if error['valid']
-            let has_valid_error = 1
-            break
-        endif
-    endfor
-    if has_valid_error
-        for error in getqflist()
-            if error['valid']
-                break
-            endif
-        endfor
-        let error_message = substitute(error['text'], '^ *', '', 'g')
-        silent cc!
-        exec ":sbuffer " . error['bufnr']
-        call RedBar()
-        echo error_message
-    else
-        call GreenBar()
-        echo "All tests passed"
-    endif
-endfunction
-
-function! RedBar()
-    hi RedBar ctermfg=white ctermbg=red guibg=red
-    echohl RedBar
-    echon repeat(" ",&columns - 1)
-    echohl
-endfunction
-
-function! GreenBar()
-    hi GreenBar ctermfg=white ctermbg=green guibg=green
-    echohl GreenBar
-    echon repeat(" ",&columns - 1)
-    echohl
-endfunction
-
-command! -nargs=* Tests call RunTests('', '')<CR>redraw<CR>call JumpToError()<CR>
-command! -nargs=* FileTests call RunTestsForFile('--failfast')<CR>redraw<CR>call JumpToError()<CR>
-" nnoremap <leader>ta :call FindDjangoManageFile()<cr>:call RunTests('', '')<cr>:redraw<cr>:call JumpToError()<cr>
-" nnoremap <leader>TA :call FindDjangoManageFile()<cr>:call RunTestsForFile('--failfast')<cr>:redraw<cr>:call JumpToError()<cr>
-
-function! Todos()
-    bel sp ~/Dropbox/Winners/Tasks/todo/shared.todo
-    set ft=todo
-    resize 10
-endfunction
-nnoremap <leader>todo :call Todos()<CR>
-"
 " Add the virtualenv's site-packages to vim path
 py << EOF
 import os.path

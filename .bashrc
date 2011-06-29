@@ -28,7 +28,7 @@ alias start_postgres="/usr/local/pgsql/bin/pg_ctl -D /usr/local/pgsql/data -l lo
 alias stop_postgres="/usr/local/pgsql/bin/pg_ctl -D /usr/local/pgsql/data -l logfile stop"
 alias start_redis="redis-server /Users/kennethlove/Developer/etc/redis.conf"
 alias start_mong="mongod run --config /usr/local/Cellar/mongodb/1.8.1-x86_64/mongod.conf"
-alias start_jenkins="java -jar /usr/local/Cellar/jenkins/1.401/lib/jenkins.war --httpPort=8081"
+alias start_jenkins="java -Dhudson.util.ProcessTreeKiller.disable=true -jar /usr/local/Cellar/jenkins/1.414/lib/jenkins.war --httpPort=8081"
 #
 # Python/Django
 alias pm="python manage.py"
@@ -162,3 +162,5 @@ complete -cf sudo
 
 source ~/.bash_vcs
 source ~/.cider.profile
+[[ -s "/Users/kennethlove/Developer/.rvm/scripts/rvm" ]] && . "/Users/kennethlove/Developer/.rvm/scripts/rvm" # Load RVM function
+
