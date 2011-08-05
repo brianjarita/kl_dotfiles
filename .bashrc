@@ -65,7 +65,7 @@ LSCOLORS=cxfxcxdxbxegedabagacad;
 export LSCOLORS;
 export PS1='\[\033[0;31m\]\h\[\033[0;33m\] \w\[\033[0m\]: '
 export EDITOR=mvim
-# export TERM=xterm-color
+export TERM=xterm-256color
 
 # don't put duplicate lines in the history. See bash(1) for more options
 export HISTCONTROL=ignoredups
