@@ -28,7 +28,7 @@ alias start_postgres="/usr/local/pgsql/bin/pg_ctl -D /usr/local/pgsql/data -l lo
 alias stop_postgres="/usr/local/pgsql/bin/pg_ctl -D /usr/local/pgsql/data -l logfile stop"
 alias start_redis="redis-server /Users/kennethlove/Developer/etc/redis.conf"
 alias start_mong="mongod run --config /usr/local/Cellar/mongodb/1.8.1-x86_64/mongod.conf"
-alias start_jenkins="java -Dhudson.util.ProcessTreeKiller.disable=true -jar /usr/local/Cellar/jenkins/1.414/lib/jenkins.war --httpPort=8081"
+alias start_jenkins="java -Dhudson.util.ProcessTreeKiller.disable=true -jar /usr/local/Cellar/jenkins/1.420/lib/jenkins.war --httpPort=8081"
 #
 # Python/Django
 alias pm="python manage.py"
@@ -49,7 +49,8 @@ export CLICOLOR="yes"
 export FIGNORE="DS_Store"
 export LANG="en_US.UTF-8"
 
-export PATH="/Users/kennethlove/Developer/Cellar/ruby/1.9.2-p0/bin:/Users/kennethlove//Developer/Cellar/ruby/1.9.2-p180/bin/:/Users/kennethlove/Developer/share/npm/bin:/Library/Frameworks/Python.framework/Versions/2.6/bin:/usr/texbin:/usr/local/bin:/usr/local/sbin:/usr/local/mysql/bin:/usr/local/pgsql/bin:/Users/kennethlove/Developer/sbin:/Users/kennethlove/.gem/ruby/1.8/bin:/Users/kennethlove/Developer/bin/flex/bin:/Users/kennethlove/Developer/Cellar/geos/3.2.2/bin/:/Users/kennethlove/.cabal/bin:$PATH"
+#export PATH="/Users/kennethlove/Developer/Cellar/ruby/1.9.2-p0/bin:/Users/kennethlove/Developer/Cellar/ruby/1.9.2-p180/bin/:/Users/kennethlove/Developer/share/npm/bin:/Library/Frameworks/Python.framework/Versions/2.6/bin:/usr/texbin:/usr/local/bin:/usr/local/sbin:/usr/local/mysql/bin:/usr/local/pgsql/bin:/Users/kennethlove/Developer/sbin:/Users/kennethlove/.gem/ruby/1.8/bin:/Users/kennethlove/Developer/bin/flex/bin:/Users/kennethlove/Developer/Cellar/geos/3.2.2/bin/:/Users/kennethlove/.cabal/bin:$PATH"
+export PATH="/usr/local/bin:$PATH"
 export PYTHONPATH="/Library/Python/2.6:/Sites:/usr/local/bin:/usr/local/lib:$PYTHONPATH"
 export NODE_PATH="/usr/local/lib/node:$NODE_PATH"
 export GDFONTPATH="/Users/kennethlove/Library/Fonts:/Library/Fonts:/System/Library/Fonts"
@@ -57,13 +58,14 @@ export WORKON_HOME=$HOME/.virtualenvs
 export PIP_VIRTUALENV_BASE=$WORKON_HOME
 export PIP_RESPECT_VIRTUALENV=true
 export PROJECT_HOME=/Sites
+export ARCH_FLAGS='-arch i386 -arch x86_64'
 
 export CLICOLOR=1;
 LSCOLORS=cxfxcxdxbxegedabagacad;
 export LSCOLORS;
 export PS1='\[\033[0;31m\]\h\[\033[0;33m\] \w\[\033[0m\]: '
 export EDITOR=mvim
-export TERM=xterm-color
+# export TERM=xterm-color
 
 # don't put duplicate lines in the history. See bash(1) for more options
 export HISTCONTROL=ignoredups
@@ -103,8 +105,8 @@ fi
 #source ~/src/django-trunk/extras/django_bash_completion
 source /usr/local/bin/virtualenvwrapper.sh
 
-# Use MacVim's VIM instead of system VIM.
-# Start gVIM
+# # Use MacVim's VIM instead of system VIM.
+# # Start gVIM
 v() {
 if [ $# == 0 ]
 then
@@ -119,7 +121,7 @@ else
 fi
 }
 
-# Start terminal version of VIM with clipboard support
+# # Start terminal version of VIM with clipboard support
 vi() {
 if [ $# == 0 ]
 then
@@ -134,7 +136,7 @@ else
 fi
 }
 
-# Start terminal version of VIM with clipboard support
+# # Start terminal version of VIM with clipboard support
 vim() {
 if [ $# == 0 ]
 then
@@ -163,4 +165,5 @@ complete -cf sudo
 source ~/.bash_vcs
 source ~/.cider.profile
 [[ -s "/Users/kennethlove/Developer/.rvm/scripts/rvm" ]] && . "/Users/kennethlove/Developer/.rvm/scripts/rvm" # Load RVM function
+
 

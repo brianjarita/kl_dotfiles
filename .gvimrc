@@ -53,8 +53,8 @@ if has("gui_macvim")
 endif
 
 " Automatically enter fullscreen
-if has("gui_running")
-    set fuoptions+=maxvert,maxhorz
-    au GUIEnter * set fullscreen
-endif
+" if has("gui_running")
+"     set fuoptions+=maxvert,maxhorz
+"     au GUIEnter * set fullscreen
+" endif
 

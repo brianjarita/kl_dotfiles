@@ -315,13 +315,13 @@ if has("autocmd")
     autocmd FileType python setlocal ts=4 sts=4 sw=4 expandtab
 
     " Treat .rss files as XML
-    autocmd BufNewFile,BufRead *.rss setfiletype xml
+    autocmd BufNewFile,BufRead *.rss setlocal filetype xml
 
     " Autodetect todo files
-    autocmd BufNewFile,BufRead *.todo setfiletype todo
+    autocmd BufNewFile,BufRead *.todo setlocal filetype todo
 
     " Autodetect Actionscript files
-    au BufNewFile,BufRead *.as set filetype=actionscript
+    au BufNewFile,BufRead *.as setlocal filetype=actionscript
 
     " Automatically strip extraneous whitespace when saving Python or
     " Javascript files.
@@ -329,14 +329,14 @@ if has("autocmd")
 
     " markdown
     augroup mkd
-        autocmd BufRead *.mkd  set ai formatoptions=tcroqn2 comments=n:>
+        autocmd BufRead *.mkd  setlocal ai formatoptions=tcroqn2 comments=n:>
     augroup END
 
     " JSON syntax
-    au! BufRead,BufNewFile *.json setfiletype json
+    au! BufRead,BufNewFile *.json setlocal filetype json
 
     " jQuery syntax
-    au! BufRead,BufNewFile *.js set ft=javascript.jquery
+    au! BufRead,BufNewFile *.js setlocal ft=javascript.jquery
 
     " Display tabs at the beginning of a line in Python mode as bad
     au BufRead,BufNewFile *.py,*.pyw match ExtraWhitespace /^\t\+/
@@ -350,27 +350,27 @@ if has("autocmd")
 
     autocmd BufEnter * :syntax sync fromstart
 
-    autocmd BufRead *.html set filetype=htmldjango.html
-    autocmd BufRead *.py set smartindent cinwords=if,else,elif,for,while,try,except,finally,def,class
+    autocmd BufRead *.html setlocal filetype=htmldjango.html
+    autocmd BufRead *.py setlocal smartindent cinwords=if,else,elif,for,while,try,except,finally,def,class
 
     " mapping to mark HTML5 files
     autocmd BufEnter *html nmap <F7> :setfiletype html5<CR>
 
     if version >= 700
-        autocmd FileType python set omnifunc=pythoncomplete#Complete
-        autocmd FileType css,sass set omnifunc=csscomplete#CompleteCSS
-        autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
-        autocmd FileType ruby,eruby set omnifunc=rubycomplete#Complete
+        autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+        autocmd FileType css,sass setlocal omnifunc=csscomplete#CompleteCSS
+        autocmd FileType html setlocal omnifunc=htmlcomplete#CompleteTags
+        autocmd FileType ruby,eruby setlocal omnifunc=rubycomplete#Complete
         autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
         autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
         autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
     endif
 
     " CSS, XML, and HTML file shoulds be folded based on indent
-    au BufNewFile,BufRead *css,*xml,*htm*,*as set foldmethod=indent
+    au BufNewFile,BufRead *css,*xml,*htm*,*as setlocal foldmethod=indent
 
     " CSS and Sass files should see - as part of a keyword
-    au! BufRead,BufNewFile *.sass,*.scss,*.less setfiletype sass
+    au! BufRead,BufNewFile *.sass,*.scss,*.less setlocal filetype sass
 
     " PHP
     augroup php
@@ -379,13 +379,20 @@ if has("autocmd")
         autocmd FileType php let php_htmlInString=1
         autocmd FileType php let php_noShortTags=1
         autocmd FileType php let php_folding=1
-        autocmd FileType php set omnifunc=phpcomplete#CompletePHP
+        autocmd FileType php setlocal omnifunc=phpcomplete#CompletePHP
+    augroup END
+
+    " JS
+    augroup js
+        autocmd!
+        au FileType javascript,javascript.jquery setlocal foldmethod=marker
+        au FileType javascript,javascript.jquery setlocal foldmarker={,]
     augroup END
 
     " USE GOOGLE'S JAVASCRIPT LINTER
     """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-    au BufNewFile,BufRead *.js set makeprg=gjslint\ %
-    au BufNewFile,BufRead *.js set errorformat=%-P-----\ FILE\ \ :\ \ %f\ -----,Line\ %l\\,\ E:%n:\ %m,%-Q,%-GFound\ %s,%-GSome\ %s,%-Gfixjsstyles%s,%-Gscript\ can\ %s,%-G
+    au BufNewFile,BufRead *.js setlocal makeprg=gjslint\ %
+    au BufNewFile,BufRead *.js setlocal errorformat=%-P-----\ FILE\ \ :\ \ %f\ -----,Line\ %l\\,\ E:%n:\ %m,%-Q,%-GFound\ %s,%-GSome\ %s,%-Gfixjsstyles%s,%-Gscript\ can\ %s,%-G
 
     " SAVE FILES WHEN VIM LOSES FOCUS
     """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -936,15 +943,15 @@ endfunc
 au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif
 
 " Add the virtualenv's site-packages to vim path
-py << EOF
-import os.path
-import sys
-import vim
-if os.environ['VIRTUAL_ENV']:
-    project_base_dir = os.environ['VIRTUAL_ENV']
-    sys.path.insert(0, project_base_dir)
-    activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
-    execfile(activate_this, dict(__file__=activate_this))
-EOF
+"py << EOF
+"import os.path
+"import sys
+"import vim
+"if os.environ['VIRTUAL_ENV']:
+"    project_base_dir = os.environ['VIRTUAL_ENV']
+"    sys.path.insert(0, project_base_dir)
+"    activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
+"    execfile(activate_this, dict(__file__=activate_this))
+"EOF
 
 
