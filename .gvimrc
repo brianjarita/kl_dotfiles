@@ -12,8 +12,7 @@ set columns=160
 set gfn=Anonymous\ Pro:h12
 
 set background=light
-let g:lucius_style='light'
-colorscheme Lucius
+colorscheme diablo3
 
 "Invisible character colors
 highlight NonText guifg=#4a4a59

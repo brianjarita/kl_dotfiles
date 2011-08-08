@@ -31,7 +31,7 @@ set winminwidth=0
 set winheight=10
 set display+=lastline
 set textwidth=0
-set columns=90
+"set columns=90
 set wrapmargin=10
 set numberwidth=5
 set relativenumber
@@ -118,9 +118,10 @@ set showtabline=1
 " COLORS
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 syntax on
-colorscheme wombat256
 set background=dark
-set colorcolumn=80
+colorscheme lettuce
+let g:colors_name="lettuce"
+"set colorcolumn=80
 hi NonText ctermfg=7 guifg=gray
 hi SpecialKey ctermfg=8
 
@@ -357,7 +358,7 @@ if has("autocmd")
     autocmd BufEnter *html nmap <F7> :setfiletype html5<CR>
 
     if version >= 700
-        autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+        autocmd FileType python setlocal omnifunc=pythoncomplete#Complete colorcolumn=80
         autocmd FileType css,sass setlocal omnifunc=csscomplete#CompleteCSS
         autocmd FileType html setlocal omnifunc=htmlcomplete#CompleteTags
         autocmd FileType ruby,eruby setlocal omnifunc=rubycomplete#Complete
@@ -728,6 +729,7 @@ let g:NERDTreeIgnore = ['\.git$', '\.svn$', '\.jpg$', '\.gif$', '\.png$', '\.pyc
 let g:NERDTreeShowBookmarks = 1
 let g:NERDTreeSortOrder = ['\/$', '*']
 let g:NERDTreeShowLineNumbers = 1
+let g:NERDTreeMinimalUI = 1
 
 " YANKRING
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
