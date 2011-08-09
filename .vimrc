@@ -34,7 +34,7 @@ set textwidth=0
 "set columns=90
 set wrapmargin=10
 set numberwidth=5
-set relativenumber
+"set relativenumber
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " BEHAVIOR
@@ -161,7 +161,7 @@ set statusline+=\ %#warningmsg# " switch to warningmsg color
 set statusline+=%{SyntasticStatuslineFlag()} " show Syntastic flag
 set statusline+=%* " back to normal color
 set statusline+=\ %=%< " Right-align and start truncation
-set statusline+=%{TagInStatusLine()} " Show current class/function in Python
+"set statusline+=%{TagInStatusLine()} " Show current class/function in Python
 set statusline+=\ [%04l/%04L\ %03c] " Show current line number, total lines, current column
 set statusline+=\ %p%% " Percentage through file in lines
 
@@ -342,7 +342,7 @@ if has("autocmd")
     " Display tabs at the beginning of a line in Python mode as bad
     au BufRead,BufNewFile *.py,*.pyw match ExtraWhitespace /^\t\+/
     " Make trailing whitespace be flagged as bad
-    au BufRead,BufNewFile *.py,*.pyw match ExtraWhitespace /\s\+$/
+    " au BufRead,BufNewFile *.py,*.pyw match ExtraWhitespace /\s\+$/
     au BufRead,BufNewFile *.py,*.pyw let python_space_errors = 1
     au BufRead,BufNewfile *.py,*.pyw call s:HighlightLongLines(79)
 
