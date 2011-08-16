@@ -28,7 +28,7 @@ source $ZSH/oh-my-zsh.sh
 # Customize to your needs...
 #export 
 #PATH=/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/Users/kennethlove/Developer/.rvm/gems/ruby-1.9.2-p180/bin:/Users/kennethlove/Developer/.rvm/gems/ruby-1.9.2-p180@global/bin:/Users/kennethlove/Developer/.rvm/rubies/ruby-1.9.2-p180/bin:/Users/kennethlove/Developer/.rvm/bin:/Users/kennethlove/Developer/bin
-export PATH="/usr/local/bin:$PATH"
+export PATH="/usr/local/bin:/usr/local/sbin/:$PATH"
 export TERM="xterm-256color"
 
 alias ls="ls -aFGhkLlpsTP"

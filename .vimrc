@@ -708,7 +708,15 @@ let Tlist_Auto_Update = 1
 let Tlist_Show_One_File = 1
 let g:tlist_javascript_settings = 'js;javascript;s:string;a:array;o:object;f:function'
 
-nnoremap <silent> <Leader>T :TlistToggle<CR>
+"nnoremap <silent> <Leader>T :TlistToggle<CR>
+
+" TAGBAR
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:tagbar_usearrows = 1
+let g:tagbar_ctags_bin = "/usr/local/bin/ctags"
+let g:tagbar_autoshowtag = 1
+
+nnoremap <leader>T :TagbarOpenAutoClose<CR>
 
 " RAGTAG
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
