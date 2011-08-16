@@ -11,8 +11,8 @@ set columns=160
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set gfn=Anonymous\ Pro:h12
 
-set background=light
-colorscheme diablo3
+set background=dark
+colorscheme xoria256
 
 "Invisible character colors
 highlight NonText guifg=#4a4a59

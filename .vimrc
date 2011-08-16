@@ -119,9 +119,8 @@ set showtabline=1
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 syntax on
 set background=dark
-colorscheme lettuce
-let g:colors_name="lettuce"
-"set colorcolumn=80
+colorscheme xoria256
+let g:colors_name="xoria256"
 hi NonText ctermfg=7 guifg=gray
 hi SpecialKey ctermfg=8
 
@@ -595,6 +594,8 @@ nnoremap - :Explore<CR>
 " Cmd-/ for comment toggle.
 nnoremap <D-/> :TComment<CR>
 vnoremap <D-/> :TComment<CR>
+nnoremap <Leader>/ :TComment<CR>
+vnoremap <Leader>/ :TComment<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " PLUGIN SETTINGS

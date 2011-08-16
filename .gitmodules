@@ -22,9 +22,6 @@
 [submodule ".vim/bundle/argumentrewrap"]
 	path = .vim/bundle/argumentrewrap
 	url = https://github.com/jakobwesthoff/argumentrewrap.git
-[submodule ".vim/bundle/vim-markdown-preview"]
-	path = .vim/bundle/vim-markdown-preview
-	url = https://github.com/robgleeson/vim-markdown-preview.git
 [submodule ".vim/bundle/minibufexpl"]
 	path = .vim/bundle/minibufexpl
 	url = https://github.com/fholgado/minibufexpl.vim.git
@@ -76,3 +73,6 @@
 [submodule ".vim/bundle/gundo"]
 	path = .vim/bundle/gundo
 	url = https://github.com/sjl/gundo.vim.git
+[submodule ".vim/bundle/tagbar"]
+	path = .vim/bundle/tagbar
+	url = git://github.com/majutsushi/tagbar.git
