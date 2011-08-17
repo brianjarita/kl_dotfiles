@@ -482,12 +482,12 @@ vnoremap <A-j> :m'>+<CR>gv=gv
 vnoremap <A-k> :m-2<CR>gv=gv
 
 " Mac OS X/Safari keybindings for tabs
-nmap <D-[> :tabprevious<CR>
-nmap <D-]> :tabnext<CR>
-map <D-[> :tabprevious<CR>
-map <D-]> :tabnext<CR>
-imap <D-[> <Esc>:tabprevious<CR>i
-imap <D-]> <Esc>:tabnext<CR>i
+nmap <D-{> :tabprevious<CR>
+nmap <D-}> :tabnext<CR>
+map <D-{> :tabprevious<CR>
+map <D-}> :tabnext<CR>
+imap <D-{> <Esc>:tabprevious<CR>i
+imap <D-}> <Esc>:tabnext<CR>i
 nmap <D-t> :tabnew<CR>
 imap <D-t> <Esc>:tabnew<CR>
 
