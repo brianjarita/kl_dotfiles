@@ -1,0 +1,37 @@
+[ui]
+username = Kenneth Love <kenneth@gigantuan.net>
+verbose = True
+editor = mvim
+ssh = ssh -C
+
+[extensions]
+prompt = /Users/kennethlove/src/hg-prompt/prompt.py
+hgext.convert =
+hgext.extdiff =
+hgext.bookmarks =
+bookmarks =
+mq = 
+color =
+fetch =
+rebase =
+transplant =
+hgshelve = /Users/kennethlove/.hgext/hgshelve.py
+
+[bookmarks]
+track.current = True
+
+[merge-tools]
+filemerge.executable = /usr/local/bin/opendiff-w
+filemerge.args = $local $other -ancestor $base -merge $output
+threesome.executable = vim
+threesome.args = -f $base $local $other $output -c 'ThreesomeInit'
+threesome.premerge = keep
+threesome.priority = 1
+
+[extdiff]
+cmd.opendiff = opendiff-w
+
+cmd.vimdiff = mvimdiff
+opts.vimdiff = -f '+next' '+execute "DirDiff" argv(0) argv(1)'
+
+
