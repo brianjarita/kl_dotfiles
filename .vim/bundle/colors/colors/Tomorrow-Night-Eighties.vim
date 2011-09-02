@@ -1,29 +1,22 @@
-" Tomorrow Night - Full Colour and 256 Colour
+" Tomorrow Night Eighties - Full Colour and 256 Colour
 " http://chriskempson.com
 "
 " Hex colour conversion functions borrowed from the theme "Desert256""
 
-let g:colors_name = "Tomorrow-Night"
+let g:colors_name = "Tomorrow-Night-Eighties"
 
 " Default GUI Colours
-let s:foreground = "c5c8c6"
-let s:background = "1d1f21"
-let s:selection = "373b41"
-let s:line = "282a2e"
-let s:comment = "969896"
-let s:red = "cc6666"
-let s:orange = "de935f"
-let s:yellow = "f0c674"
-let s:green = "b5bd68"
-let s:blue = "81a2be"
-let s:purple = "b294bb"
-
-" Console 256 Colours
-if !has("gui_running")
-	let s:background = "303030"
-	let s:line = "3a3a3a"
-	let s:selection = "585858"
-end
+let s:foreground = "cccccc"
+let s:background = "2d2d2d"
+let s:selection = "515151"
+let s:line = "393939"
+let s:comment = "999999"
+let s:red = "f2777a"
+let s:orange = "f99157"
+let s:yellow = "ffcc66"
+let s:green = "99cc99"
+let s:blue = "99cccc"
+let s:purple = "cc99cc"
 
 set background=dark
 hi clear

@@ -118,9 +118,10 @@ set showtabline=1
 " COLORS
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 syntax on
+set t_Co=256
 set background=dark
-colorscheme xoria256
-let g:colors_name="xoria256"
+colorscheme Tomorrow-Night
+let g:colors_name="Tomorrow-Night"
 hi NonText ctermfg=7 guifg=gray
 hi SpecialKey ctermfg=8
 
@@ -264,18 +265,6 @@ set nobackup
 set viminfo=%100,'100,/100,h,\"500,:100,n~/.viminfo
 set history=500
 set updatecount=100
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" SPELLING
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-if v:version >= 700
-    setlocal spell spelllang=en_us
-    nmap <localleader>ss :set spell!<CR>
-endif
-try
-    lang en_US
-catch
-endtry
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " SEARCH
@@ -601,6 +590,10 @@ vnoremap <Leader>/ :TComment<CR>
 " PLUGIN SETTINGS
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+" SIMPLENOTE
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+source ~/.simplenoterc
+
 " DJANGO NOSE & PYTEST
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 map <leader>dt :set makeprg=python\ manage.py\ test\|:call MakeGreen()<CR>
@@ -635,9 +628,6 @@ let g:chapa_default_mappings=1
 map <leader>tt <Plug>VimwikiToggleListItem
 let g:vimwiki_list= [{'path': '~/Dropbox/PlainText/vimwiki/', 'path_html': '~/Dropbox/Public/vimwiki/', 'ext': '.txt'}]
 
-" TOGGLE RELATIVE
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-nnoremap <C-L> :call g:ToggleNuMode()<CR>
 
 " ZENCODING
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
