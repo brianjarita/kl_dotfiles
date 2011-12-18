@@ -120,8 +120,8 @@ set showtabline=1
 syntax on
 set t_Co=256
 set background=dark
-colorscheme Tomorrow-Night
-let g:colors_name="Tomorrow-Night"
+colorscheme solarized
+let g:colors_name="Tomorrow-Night-Bright"
 hi NonText ctermfg=7 guifg=gray
 hi SpecialKey ctermfg=8
 
@@ -294,27 +294,27 @@ if has("autocmd")
     autocmd FileType yaml setlocal ts=4 sts=4 sw=4 expandtab
 
     " Customisations based on house-style (arbitrary)
-    autocmd FileType html setlocal ts=4 sts=4 sw=4 noexpandtab
-    autocmd FileType xhtml setlocal ts=4 sts=4 sw=4 noexpandtab
-    autocmd FileType htmldjango.html setlocal ts=4 sts=4 sw=4 noexpandtab
-    autocmd FileType htmldjango setlocal ts=4 sts=4 sw=4 noexpandtab
-    autocmd FileType css setlocal ts=2 sts=2 sw=2 expandtab
+    autocmd FileType html setlocal ts=4 sts=4 sw=4 expandtab
+    autocmd FileType xhtml setlocal ts=4 sts=4 sw=4 expandtab
+    autocmd FileType htmldjango.html setlocal ts=4 sts=4 sw=4 expandtab
+    autocmd FileType htmldjango setlocal ts=4 sts=4 sw=4 expandtab
+    autocmd FileType css setlocal ts=4 sts=4 sw=4 expandtab
     autocmd FileType javascript setlocal ts=4 sts=4 sw=4 expandtab
     autocmd FileType python setlocal ts=4 sts=4 sw=4 expandtab nocindent
     autocmd FileType python setlocal ts=4 sts=4 sw=4 expandtab
 
     " Treat .rss files as XML
-    autocmd BufNewFile,BufRead *.rss setlocal filetype xml
+    autocmd BufNewFile,BufRead *.rss setlocal filetype=xml
 
     " Autodetect todo files
-    autocmd BufNewFile,BufRead *.todo setlocal filetype todo
+    autocmd BufNewFile,BufRead *.todo setlocal filetype=todo
 
     " Autodetect Actionscript files
     au BufNewFile,BufRead *.as setlocal filetype=actionscript
 
     " Automatically strip extraneous whitespace when saving Python or
     " Javascript files.
-    autocmd BufWritePre *.py,*.js :call <SID>StripTrailingWhitespaces()
+    "autocmd BufWritePre *.py,*.js :call <SID>StripTrailingWhitespaces()
 
     " markdown
     augroup mkd
@@ -322,7 +322,7 @@ if has("autocmd")
     augroup END
 
     " JSON syntax
-    au! BufRead,BufNewFile *.json setlocal filetype json
+    au! BufRead,BufNewFile *.json setlocal filetype=json
 
     " jQuery syntax
     au! BufRead,BufNewFile *.js setlocal ft=javascript.jquery
@@ -359,7 +359,8 @@ if has("autocmd")
     au BufNewFile,BufRead *css,*xml,*htm*,*as setlocal foldmethod=indent
 
     " CSS and Sass files should see - as part of a keyword
-    au! BufRead,BufNewFile *.sass,*.scss,*.less setlocal filetype sass
+    au! BufRead,BufNewFile *.sass,*.scss setlocal filetype=sass
+    au! BufRead,BufNewFile *.less setlocal filetype=less
 
     " PHP
     augroup php
@@ -374,8 +375,7 @@ if has("autocmd")
     " JS
     augroup js
         autocmd!
-        au FileType javascript,javascript.jquery setlocal foldmethod=marker
-        au FileType javascript,javascript.jquery setlocal foldmarker={,]
+        au FileType javascript,javascript.jquery,json setlocal foldmethod=indent
     augroup END
 
     " USE GOOGLE'S JAVASCRIPT LINTER
@@ -396,6 +396,9 @@ endif
 " Shortcut for square brackets "
 onoremap id i[
 onoremap ad a[
+
+" Toggle paste mode quickly
+nnoremap <localleader>pp :set invpaste paste?<CR>
 
 " Next ()
 vnoremap <silent> inb :<C-U>normal! f(vib<cr>
@@ -955,4 +958,5 @@ au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|
 "    execfile(activate_this, dict(__file__=activate_this))
 "EOF
 
-
+nmap <F3> <C-R>=strftime("%Y-%m-%d %H:%M:%S")<CR><Esc>
+imap <F3> <C-R>=strftime("%Y-%m-%d %H:%M:%S")<CR>

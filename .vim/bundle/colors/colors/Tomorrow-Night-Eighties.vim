@@ -3,8 +3,6 @@
 "
 " Hex colour conversion functions borrowed from the theme "Desert256""
 
-let g:colors_name = "Tomorrow-Night-Eighties"
-
 " Default GUI Colours
 let s:foreground = "cccccc"
 let s:background = "2d2d2d"
@@ -15,12 +13,15 @@ let s:red = "f2777a"
 let s:orange = "f99157"
 let s:yellow = "ffcc66"
 let s:green = "99cc99"
+let s:aqua = "009999"
 let s:blue = "99cccc"
 let s:purple = "cc99cc"
 
 set background=dark
 hi clear
 syntax reset
+
+let g:colors_name = "Tomorrow-Night-Eighties"
 
 if has("gui_running") || &t_Co == 88 || &t_Co == 256
 	" Returns an approximate grey index for the given grey level
@@ -236,6 +237,7 @@ if has("gui_running") || &t_Co == 88 || &t_Co == 256
 	call <SID>X("NonText", s:selection, "", "")
 	call <SID>X("SpecialKey", s:selection, "", "")
 	call <SID>X("Search", s:background, s:yellow, "")
+	call <SID>X("TabLine", s:foreground, s:background, "reverse")
 	call <SID>X("StatusLine", s:foreground, s:background, "reverse")
 	call <SID>X("StatusLineNC", s:foreground, s:background, "reverse")
 	call <SID>X("Visual", "", s:selection, "")
@@ -265,7 +267,7 @@ if has("gui_running") || &t_Co == 88 || &t_Co == 256
 	call <SID>X("String", s:green, "", "")
 	call <SID>X("Special", s:foreground, "", "")
 	call <SID>X("PreProc", s:purple, "", "")
-	call <SID>X("Operator", s:foreground, "", "none")
+	call <SID>X("Operator", s:aqua, "", "none")
 	call <SID>X("Type", s:blue, "", "none")
 	call <SID>X("Define", s:purple, "", "none")
 	call <SID>X("Include", s:blue, "", "") 
@@ -293,6 +295,20 @@ if has("gui_running") || &t_Co == 88 || &t_Co == 256
 	call <SID>X("rubyInclude", s:blue, "", "")
 	call <SID>X("rubyLocalVariableOrMethod", s:orange, "", "")
 	call <SID>X("rubyCurlyBlock", s:orange, "", "")
+	
+	" Python Highlighting
+	call <SID>X("pythonInclude", s:purple, "", "")
+	call <SID>X("pythonStatement", s:purple, "", "")
+	call <SID>X("pythonConditional", s:purple, "", "")
+	call <SID>X("pythonFunction", s:blue, "", "")
+	
+	" JavaScript Highlighting
+	call <SID>X("javaScriptBraces", s:foreground, "", "")
+	call <SID>X("javaScriptFunction", s:purple, "", "")
+	call <SID>X("javaScriptConditional", s:purple, "", "")
+	call <SID>X("javaScriptRepeat", s:purple, "", "")
+	call <SID>X("javaScriptNumber", s:orange, "", "")
+	call <SID>X("javaScriptMember", s:orange, "", "")	
 
 	" Delete Functions
 	delf <SID>X

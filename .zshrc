@@ -21,15 +21,18 @@ ZSH_THEME="../custom/themes/kennethlove"
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git brew django github osx pip redis-cli ssh-agent vagrant vi-mode lol)
+plugins=(git brew django github osx pip redis-cli ssh-agent vagrant vi-mode lol zsh-syntax-highlighting zsh-history-substring-search)
 
 source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
 #export 
 #PATH=/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/Users/kennethlove/Developer/.rvm/gems/ruby-1.9.2-p180/bin:/Users/kennethlove/Developer/.rvm/gems/ruby-1.9.2-p180@global/bin:/Users/kennethlove/Developer/.rvm/rubies/ruby-1.9.2-p180/bin:/Users/kennethlove/Developer/.rvm/bin:/Users/kennethlove/Developer/bin
-export PATH="/usr/local/bin:/usr/local/sbin/:$PATH"
+export PATH="/usr/local/bin:/usr/local/sbin:/Users/kennethlove/.oh-my-zsh:$PATH"
 export TERM="xterm-256color"
+export NODE_PATH="/usr/local/lib/node_modules:$NODE_PATH"
+
+eval `gdircolors /Users/kennethlove/kl_dotfiles/dircolors.256dark`
 
 alias ls="ls -aFGhkLlpsTP"
 alias l="ls"
@@ -43,6 +46,7 @@ alias pmr="python manage.py runserver"
 alias pms="python manage.py shell"
 alias pmrp="python manage.py runserver_plus"
 alias pmsp="python manage.py shell_plus"
+alias pmcs="python manage.py collectstatic --noinput"
 
 export WORKON_HOME=$HOME/.virtualenvs
 source /usr/local/bin/virtualenvwrapper.sh
@@ -50,6 +54,9 @@ export PIP_RESPECT_VIRTUALENV=true
 export PIP_VIRTUALENV_BASE=$WORKON_HOME
 
 export ARCH_FLAGS="-arch i386 -arch x86_64"
+
+setopt auto_cd
+cdpath=(/Sites)
 
 source ~/.cider.profile
 [[ -s "/Users/kennethlove/Developer/.rvm/scripts/rvm" ]] && . "/Users/kennethlove/Developer/.rvm/scripts/rvm"
