@@ -61,3 +61,9 @@
 [submodule "bundle/coffee-script"]
 	path = bundle/coffee-script
 	url = https://github.com/kchmck/vim-coffee-script.git
+[submodule ".vim/bundle/makegreen"]
+	path = .vim/bundle/makegreen
+	url = https://github.com/reinh/vim-makegreen
+[submodule ".vim/bundle/py.test"]
+	path = .vim/bundle/py.test
+	url = https://github.com/alfredodeza/pytest.vim.git
