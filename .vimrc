@@ -590,7 +590,19 @@ vnoremap <Leader>/ :TComment<CR>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " PLUGIN SETTINGS
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"
+
+" Buffergator
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:buffergator_viewport_split_policy="T"
+let g:buffergator_split_size=10
+let g:buffergator_sort_regime="mru"
+
+" CtrlP
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:ctrlp_map = "<c-a>"
+let g:ctrlp_custom_ignore = "\.git$\|\.hg$\|\.svn$\|\.pyc$"
+let g:ctrlp_working_path_mode = 2
+
 " POWERLINE
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:Powerline_symbols = "fancy"
@@ -675,10 +687,6 @@ let g:netrw_list_hide = '.*\.py[co]$,\.git$,\.swp$'
 let g:netrw_http_cmd = "wget -q -O" " or 'curl -Ls -o'
 let g:netrw_winsize = 10
 let g:netrw_alto = 1
-
-" LUSTYJUGGLER
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:LustyJugglerSuppressRubyWarning = 1
 
 " EASYTAGS
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
