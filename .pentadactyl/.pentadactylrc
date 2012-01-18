@@ -1,0 +1,26 @@
+set visualbell
+set newtab=all
+set defsearch=duckduckgo-ssl
+set autocomplete=".*"
+set hintmatching=wordstartswith
+
+set passkeys=
+set passkeys+="https://reader\.google\.com/*":jkeA
+set passkeys+="http://www\.google\.com/reader/*":jkeA
+set passkeys+="http://www\.tumblr\.com/*":jk
+set passkeys+="http://www\.boston\.com/bigpicture/*":jk
+set passkeys+="https://www\.google\.com/mail/*":jkcr?
+set passkeys+="https://github\.com/*":wts?jkcoyxIUelu/hHLKJ
+
+set fbwhitelist=
+set fbwhitelist+="http://www\.thisoldhouse\.com/*"
+
+nmap <D-S-d> <Nop>
+nmap <C-S-d> :pinboard<CR>
+nmap <C-l> :toolbartoggle Navigation Toolbar<CR>
+nmap <C-M-S-r> :read<CR>
+nmap <C-M-r> :readmode<CR>
+
+command! pinboard :open javascript:(function(){q=location.href;if(document.getSelection){d=document.getSelection();}else{d='';};p=document.title;void(open('https://pinboard.in/add?showtags=yes&url='+encodeURIComponent(q)+'&description='+encodeURIComponent(d)+'&title='+encodeURIComponent(p),'Pinboard',%20'toolbar=no,width=700,height=600'))})()
+command! read :open javascript:function%20iprl5(){var%20d=document,z=d.createElement('scr'+'ipt'),b=d.body,l=d.location;try{if(!b)throw(0);d.title='(Saving...)%20'+d.title;z.setAttribute('src',l.protocol+'//www.instapaper.com/j/aRXpgAELCV7Q?u='+encodeURIComponent(l.href)+'&t='+(new%20Date().getTime()));b.appendChild(z);}catch(e){alert('Please%20wait%20until%20the%20page%20has%20loaded.');}}iprl5();void(0)
+command! readmode :open javascript:function%20iptxt(){var%20d=document;try{if(!d.body)throw(0);window.location='http://www.instapaper.com/text?u='+encodeURIComponent(d.location.href);}catch(e){alert('Please%20wait%20until%20the%20page%20has%20loaded.');}}iptxt();void(0)
