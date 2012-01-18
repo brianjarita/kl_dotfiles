@@ -121,7 +121,6 @@ syntax on
 set t_Co=256
 set background=dark
 colorscheme solarized
-let g:colors_name="Tomorrow-Night-Bright"
 hi NonText ctermfg=7 guifg=gray
 hi SpecialKey ctermfg=8
 
@@ -148,20 +147,19 @@ set laststatus=2
 set statusline=%-.50F " Full path to file, 50 characters max
 set statusline+=\ %{fugitive#statusline()} " Fugitive status line
 set statusline+=\ %{g:HgStatusForFile()} " Thermometer status line
+set statusline+=\ %{VirtualEnvStatusline()} " Virtualenv status line
 set statusline+=\ (%n) " buffer number
 set statusline+=\ %([%M%R%H%W]\ %) " Modified, Read-only, Help, and Preview flags
 set statusline+=\ %y " Filetype
 set statusline+=\ %#error# " switch to error color
 set statusline+=%{StatuslineTabWarning()} " show warning about mixed tabs or bad &et
 set statusline+=%{StatuslineTrailingSpaceWarning()} " show warning about trailing whitespace
-"set statusline+=%{StatuslineLongLineWarning()} " show warning about long 
-"lines
+set statusline+=%{StatuslineLongLineWarning()} " show warning about long lines
 set statusline+=%* " back to normal color
 set statusline+=\ %#warningmsg# " switch to warningmsg color
 set statusline+=%{SyntasticStatuslineFlag()} " show Syntastic flag
 set statusline+=%* " back to normal color
-set statusline+=\ %=%< " Right-align and start truncation
-"set statusline+=%{TagInStatusLine()} " Show current class/function in Python
+set statusline+=\ %= " Right-align and start truncation
 set statusline+=\ [%04l/%04L\ %03c] " Show current line number, total lines, current column
 set statusline+=\ %p%% " Percentage through file in lines
 
@@ -300,7 +298,6 @@ if has("autocmd")
     autocmd FileType htmldjango setlocal ts=4 sts=4 sw=4 expandtab
     autocmd FileType css setlocal ts=4 sts=4 sw=4 expandtab
     autocmd FileType javascript setlocal ts=4 sts=4 sw=4 expandtab
-    autocmd FileType python setlocal ts=4 sts=4 sw=4 expandtab nocindent
     autocmd FileType python setlocal ts=4 sts=4 sw=4 expandtab
 
     " Treat .rss files as XML
@@ -333,6 +330,7 @@ if has("autocmd")
     " au BufRead,BufNewFile *.py,*.pyw match ExtraWhitespace /\s\+$/
     au BufRead,BufNewFile *.py,*.pyw let python_space_errors = 1
     au BufRead,BufNewfile *.py,*.pyw call s:HighlightLongLines(79)
+    au BufNewFile,BufRead *.py compiler nose
 
     " only UNIX line endings.
     au BufNewFile *.* set fileformat=unix
@@ -592,6 +590,10 @@ vnoremap <Leader>/ :TComment<CR>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " PLUGIN SETTINGS
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"
+" POWERLINE
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:Powerline_symbols = "fancy"
 
 " SIMPLENOTE
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -960,3 +962,4 @@ EOF
 
 nmap <F3> <C-R>=strftime("%Y-%m-%d %H:%M:%S")<CR><Esc>
 imap <F3> <C-R>=strftime("%Y-%m-%d %H:%M:%S")<CR>
+

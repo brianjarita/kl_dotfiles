@@ -58,12 +58,24 @@
 [submodule ".vim/bundle/vim-less"]
 	path = .vim/bundle/vim-less
 	url = https://github.com/groenewege/vim-less.git
-[submodule "bundle/coffee-script"]
-	path = bundle/coffee-script
-	url = https://github.com/kchmck/vim-coffee-script.git
 [submodule ".vim/bundle/makegreen"]
 	path = .vim/bundle/makegreen
 	url = https://github.com/reinh/vim-makegreen
 [submodule ".vim/bundle/py.test"]
 	path = .vim/bundle/py.test
 	url = https://github.com/alfredodeza/pytest.vim.git
+[submodule ".vim/bundle/nose.vim"]
+	path = .vim/bundle/nose.vim
+	url = https://github.com/lambdalisue/nose.vim.git
+[submodule ".vim/bundle/vim-virtualenv"]
+	path = .vim/bundle/vim-virtualenv
+	url = https://github.com/jmcantrell/vim-virtualenv.git
+[submodule ".vim/bundle/powerline"]
+	path = .vim/bundle/powerline
+	url = https://github.com/Lokaltog/vim-powerline.git
+[submodule ".vim/bundle/ctrlp"]
+	path = .vim/bundle/ctrlp
+	url = https://github.com/kien/ctrlp.vim.git
+[submodule ".vim/bundle/coffeescript"]
+	path = .vim/bundle/coffeescript
+	url = https://github.com/kchmck/vim-coffee-script.git

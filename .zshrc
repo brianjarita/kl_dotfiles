@@ -21,13 +21,11 @@ ZSH_THEME="../custom/themes/kennethlove"
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git brew django github osx pip redis-cli ssh-agent vagrant vi-mode lol zsh-syntax-highlighting zsh-history-substring-search)
+plugins=(git brew django github osx pip redis-cli ssh-agent vagrant vi-mode lol mercurial python zsh-syntax-highlighting zsh-history-substring-search)
 
 source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
-#export 
-#PATH=/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/Users/kennethlove/Developer/.rvm/gems/ruby-1.9.2-p180/bin:/Users/kennethlove/Developer/.rvm/gems/ruby-1.9.2-p180@global/bin:/Users/kennethlove/Developer/.rvm/rubies/ruby-1.9.2-p180/bin:/Users/kennethlove/Developer/.rvm/bin:/Users/kennethlove/Developer/bin
 export PATH="/usr/local/bin:/usr/local/sbin:/Users/kennethlove/.oh-my-zsh:$PATH"
 export TERM="xterm-256color"
 export NODE_PATH="/usr/local/lib/node_modules:$NODE_PATH"
@@ -48,6 +46,8 @@ alias pmrp="python manage.py runserver_plus"
 alias pmsp="python manage.py shell_plus"
 alias pmcs="python manage.py collectstatic --noinput"
 
+alias start_jenkins="java -jar /usr/local/Cellar/jenkins/1.443/lib/jenkins.war --httpPort 8888"
+
 export WORKON_HOME=$HOME/.virtualenvs
 source /usr/local/bin/virtualenvwrapper.sh
 export PIP_RESPECT_VIRTUALENV=true
@@ -57,6 +57,17 @@ export ARCH_FLAGS="-arch i386 -arch x86_64"
 
 setopt auto_cd
 cdpath=(/Sites)
+
+any() {
+    emulate -L zsh
+    unsetopt KSH_ARRAYS
+    if [[ -z "$1" ]] ; then
+        echo "any - grep for process(es) by keyword" >&2
+        echo "Usage: any " >&2 ; return 1
+    else
+        ps xauwww | grep -i --color=auto "[${1[1]}]${1[2,-1]}"
+    fi
+}
 
 source ~/.cider.profile
 [[ -s "/Users/kennethlove/Developer/.rvm/scripts/rvm" ]] && . "/Users/kennethlove/Developer/.rvm/scripts/rvm"
