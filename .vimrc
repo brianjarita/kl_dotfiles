@@ -599,8 +599,12 @@ let g:buffergator_split_size=10
 " CtrlP
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:ctrlp_map = "<c-a>"
-let g:ctrlp_custom_ignore = "\.git$\|\.hg$\|\.svn$\|\.pyc$"
+let g:ctrlp_custom_ignore = {
+\ 'dir':  '\.git$\|\.hg$\|\.svn$',
+\ 'file': '\.pyc$',
+\ }
 let g:ctrlp_working_path_mode = 2
+let g:ctrlp_dotfiles = 0
 
 " POWERLINE
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
