@@ -595,7 +595,6 @@ vnoremap <Leader>/ :TComment<CR>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:buffergator_viewport_split_policy="T"
 let g:buffergator_split_size=10
-let g:buffergator_sort_regime="mru"
 
 " CtrlP
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
