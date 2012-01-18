@@ -581,12 +581,6 @@ nnoremap <leader>a :Ack
 " Use - to open Explore
 nnoremap - :Explore<CR>
 
-" Cmd-/ for comment toggle.
-nnoremap <D-/> :TComment<CR>
-vnoremap <D-/> :TComment<CR>
-nnoremap <Leader>/ :TComment<CR>
-vnoremap <Leader>/ :TComment<CR>
-
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " PLUGIN SETTINGS
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
