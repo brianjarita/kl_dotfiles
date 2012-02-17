@@ -172,7 +172,7 @@ autocmd cursorhold,bufwritepost * unlet! b:statusline_long_line_warning
 " return an empty string if everything is fine
 function! StatuslineTabWarning()
     if !exists("b:statusline_tab_warning")
-        let tabs = search('^\t', 'nw') != 0
+        let tabs = search('^[ ]*\t', 'nw') != 0
         let spaces = search('^ ', 'nw') != 0
 
         if tabs && spaces
